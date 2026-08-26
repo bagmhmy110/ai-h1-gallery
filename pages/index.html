@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="zh" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 画廊</title>
+    <style id="theme-vars">
+:root {
+  --brand-background: #0c0c0e;
+  --brand-foreground: #ededf0;
+  --brand-card: #161618;
+  --brand-card-foreground: #ededf0;
+  --brand-popover: #1c1c1f;
+  --brand-popover-foreground: #ededf0;
+  --brand-primary: #c9a96e;
+  --brand-primary-foreground: #0c0c0e;
+  --brand-muted: #1c1c1f;
+  --brand-muted-foreground: #8a8a92;
+  --brand-border: #252528;
+  --brand-input: #252528;
+  --brand-ring: #c9a96e;
+  --brand-radius-sm: 6px;
+  --brand-radius-md: 10px;
+  --brand-radius-lg: 14px;
+  --brand-radius-small: 6px;
+  --brand-radius-medium: 10px;
+  --brand-radius-large: 14px;
+  --brand-success: #4ade80;
+  --brand-warning: #fbbf24;
+  --brand-danger: #f87171;
+}
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
+    <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
+    <style type="text/tailwindcss">
+  @theme inline {
+    --color-background: var(--brand-background);
+    --color-foreground: var(--brand-foreground);
+    --color-card: var(--brand-card);
+    --color-card-foreground: var(--brand-card-foreground);
+    --color-popover: var(--brand-popover);
+    --color-popover-foreground: var(--brand-popover-foreground);
+    --color-primary: var(--brand-primary);
+    --color-primary-foreground: var(--brand-primary-foreground);
+    --color-muted: var(--brand-muted);
+    --color-muted-foreground: var(--brand-muted-foreground);
+    --color-border: var(--brand-border);
+    --color-input: var(--brand-input);
+    --color-ring: var(--brand-ring);
+    --radius-sm: var(--brand-radius-sm);
+    --radius-md: var(--brand-radius-md);
+    --radius-lg: var(--brand-radius-lg);
+  }
+  @layer base {
+    body { background: var(--brand-background); color: var(--brand-foreground); }
+    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
+    th { @apply whitespace-nowrap; }
+  }
+    </style>
+    <style id="semantic-token-fallback">
+      .bg-background { background-color: var(--brand-background); }
+      .text-background { color: var(--brand-background); }
+      .border-background { border-color: var(--brand-background); }
+      .ring-background { --tw-ring-color: var(--brand-background); }
+      .bg-foreground { background-color: var(--brand-foreground); }
+      .text-foreground { color: var(--brand-foreground); }
+      .border-foreground { border-color: var(--brand-foreground); }
+      .ring-foreground { --tw-ring-color: var(--brand-foreground); }
+      .bg-card { background-color: var(--brand-card); }
+      .text-card { color: var(--brand-card); }
+      .border-card { border-color: var(--brand-card); }
+      .ring-card { --tw-ring-color: var(--brand-card); }
+      .bg-card-foreground { background-color: var(--brand-card-foreground); }
+      .text-card-foreground { color: var(--brand-card-foreground); }
+      .border-card-foreground { border-color: var(--brand-card-foreground); }
+      .ring-card-foreground { --tw-ring-color: var(--brand-card-foreground); }
+      .bg-popover { background-color: var(--brand-popover); }
+      .text-popover { color: var(--brand-popover); }
+      .border-popover { border-color: var(--brand-popover); }
+      .ring-popover { --tw-ring-color: var(--brand-popover); }
+      .bg-popover-foreground { background-color: var(--brand-popover-foreground); }
+      .text-popover-foreground { color: var(--brand-popover-foreground); }
+      .border-popover-foreground { border-color: var(--brand-popover-foreground); }
+      .ring-popover-foreground { --tw-ring-color: var(--brand-popover-foreground); }
+      .bg-primary { background-color: var(--brand-primary); }
+      .text-primary { color: var(--brand-primary); }
+      .border-primary { border-color: var(--brand-primary); }
+      .ring-primary { --tw-ring-color: var(--brand-primary); }
+      .bg-primary-foreground { background-color: var(--brand-primary-foreground); }
+      .text-primary-foreground { color: var(--brand-primary-foreground); }
+      .border-primary-foreground { border-color: var(--brand-primary-foreground); }
+      .ring-primary-foreground { --tw-ring-color: var(--brand-primary-foreground); }
+      .bg-muted { background-color: var(--brand-muted); }
+      .text-muted { color: var(--brand-muted); }
+      .border-muted { border-color: var(--brand-muted); }
+      .ring-muted { --tw-ring-color: var(--brand-muted); }
+      .bg-muted-foreground { background-color: var(--brand-muted-foreground); }
+      .text-muted-foreground { color: var(--brand-muted-foreground); }
+      .border-muted-foreground { border-color: var(--brand-muted-foreground); }
+      .ring-muted-foreground { --tw-ring-color: var(--brand-muted-foreground); }
+      .bg-border { background-color: var(--brand-border); }
+      .text-border { color: var(--brand-border); }
+      .border-border { border-color: var(--brand-border); }
+      .ring-border { --tw-ring-color: var(--brand-border); }
+      .bg-input { background-color: var(--brand-input); }
+      .text-input { color: var(--brand-input); }
+      .border-input { border-color: var(--brand-input); }
+      .ring-input { --tw-ring-color: var(--brand-input); }
+      .bg-ring { background-color: var(--brand-ring); }
+      .text-ring { color: var(--brand-ring); }
+      .border-ring { border-color: var(--brand-ring); }
+      .ring-ring { --tw-ring-color: var(--brand-ring); }
+    </style>
+    <style>
+      .no-scrollbar::-webkit-scrollbar { display: none; }
+      .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+      [data-icon] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
+        background-color: currentColor;
+      }
+    </style>
+</head>
+<body class="min-h-screen font-sans antialiased">
+    <style id="gallery-styles">
+      /* ---------- Layout ---------- */
+      .gallery-container { width: 100%; max-width: 1600px; margin: 0 auto; padding: 0 20px; }
+
+      /* ---------- Header ---------- */
+      .gallery-header { padding: 40px 0 28px; text-align: center; }
+      .gallery-title { font-size: clamp(28px, 4vw, 42px); font-weight: 700; letter-spacing: 2px; line-height: 1.2; }
+      .gallery-title .accent { color: var(--brand-primary); }
+      .gallery-subtitle { margin-top: 10px; font-size: 14px; color: var(--brand-muted-foreground); letter-spacing: 1px; }
+      .gallery-subtitle .num { color: var(--brand-foreground); font-weight: 600; }
+
+      /* ---------- Filter Bar ---------- */
+      .filter-bar {
+        position: sticky; top: 0; z-index: 50;
+        background: rgba(12, 12, 14, 0.82);
+        backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+        border-bottom: 1px solid var(--brand-border);
+      }
+      .filter-bar-inner {
+        display: flex; align-items: center; justify-content: space-between;
+        gap: 14px; padding: 12px 0; flex-wrap: wrap;
+      }
+      .chips { display: flex; gap: 8px; flex-wrap: wrap; }
+      .chip {
+        padding: 7px 16px; border-radius: 999px; font-size: 13px; cursor: pointer;
+        border: 1px solid var(--brand-border); background: var(--brand-card);
+        color: var(--brand-muted-foreground); transition: all .2s ease; white-space: nowrap; user-select: none;
+      }
+      .chip:hover { color: var(--brand-foreground); border-color: var(--brand-primary); }
+      .chip.active {
+        background: var(--brand-primary); color: var(--brand-primary-foreground);
+        border-color: var(--brand-primary); font-weight: 600;
+      }
+      .search-wrap { position: relative; flex: 0 1 300px; min-width: 200px; }
+      .search-wrap .search-icon {
+        position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
+        color: var(--brand-muted-foreground); pointer-events: none; display: flex;
+      }
+      .search-input {
+        width: 100%; padding: 9px 14px 9px 38px; border-radius: 999px;
+        background: var(--brand-card); border: 1px solid var(--brand-border);
+        color: var(--brand-foreground); font-size: 13px; outline: none; transition: border-color .2s ease;
+      }
+      .search-input::placeholder { color: var(--brand-muted-foreground); }
+      .search-input:focus { border-color: var(--brand-primary); }
+      @media (max-width: 640px) {
+        .filter-bar-inner { flex-direction: column; align-items: stretch; }
+        .search-wrap { flex: 1 1 100%; }
+      }
+
+      /* ---------- Grid ---------- */
+      .gallery-grid {
+        display: grid; gap: 16px; padding: 24px 0 40px;
+        grid-template-columns: repeat(2, 1fr);
+      }
+      @media (min-width: 768px)  { .gallery-grid { grid-template-columns: repeat(3, 1fr); } }
+      @media (min-width: 1024px) { .gallery-grid { grid-template-columns: repeat(4, 1fr); } }
+      @media (min-width: 1440px) { .gallery-grid { grid-template-columns: repeat(5, 1fr); } }
+
+      .card {
+        position: relative; border-radius: var(--brand-radius-lg); overflow: hidden;
+        border: 1px solid var(--brand-border); background: var(--brand-card);
+        cursor: pointer; transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+      }
+      .card:hover { transform: translateY(-3px) scale(1.015); border-color: var(--brand-primary); box-shadow: 0 12px 30px rgba(0,0,0,0.5); }
+      .card-img-wrap { position: relative; width: 100%; aspect-ratio: 3 / 4; overflow: hidden; background: #0a0a0c; }
+      .card-img {
+        width: 100%; height: 100%; object-fit: cover; display: block;
+        opacity: 0; transition: opacity .4s ease;
+      }
+      .card-img.loaded { opacity: 1; }
+      .card-img-wrap.loading::before {
+        content: ''; position: absolute; inset: 0;
+        background: linear-gradient(100deg, #141416 30%, #1f1f23 50%, #141416 70%);
+        background-size: 200% 100%; animation: shimmer 1.4s infinite;
+      }
+      .card-img-wrap.error::before {
+        content: ''; position: absolute; inset: 0; background: #141416;
+      }
+      .card-img-wrap.error::after {
+        content: '加载失败'; position: absolute; inset: 0; display: flex;
+        align-items: center; justify-content: center; color: var(--brand-muted-foreground); font-size: 12px;
+      }
+      @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+      .card-badge {
+        position: absolute; top: 8px; left: 8px; z-index: 2;
+        padding: 3px 9px; border-radius: 999px; font-size: 11px; font-weight: 600;
+        background: rgba(0, 0, 0, 0.55); color: #fff; backdrop-filter: blur(4px);
+        border: 1px solid rgba(255,255,255,0.12);
+      }
+      .card-overlay {
+        position: absolute; inset: 0; z-index: 1; display: flex; flex-direction: column;
+        justify-content: flex-end; padding: 12px; opacity: 0; transition: opacity .25s ease;
+        background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.35) 45%, transparent 75%);
+        pointer-events: none;
+      }
+      .card:hover .card-overlay { opacity: 1; }
+      .card-overlay-art { color: var(--brand-primary); font-size: 13px; font-weight: 600; line-height: 1.3; }
+      .card-overlay-ch { color: #fff; font-size: 12px; margin-top: 3px; opacity: .9; line-height: 1.3; }
+
+      /* ---------- Empty state ---------- */
+      .empty-state { display: none; flex-direction: column; align-items: center; justify-content: center; padding: 90px 20px; color: var(--brand-muted-foreground); }
+      .empty-state.show { display: flex; }
+      .empty-state .empty-icon { margin-bottom: 16px; opacity: .5; }
+      .empty-state .empty-icon svg { width: 52px; height: 52px; }
+      .empty-state p { font-size: 15px; }
+
+      /* ---------- Pagination ---------- */
+      .pagination { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 6px; padding: 8px 0 60px; }
+      .pagination .pg-info { width: 100%; text-align: center; font-size: 13px; color: var(--brand-muted-foreground); margin-bottom: 12px; }
+      .pagination .pg-info .num { color: var(--brand-foreground); font-weight: 600; }
+      .pg-btn {
+        min-width: 36px; height: 36px; padding: 0 10px; border-radius: var(--brand-radius-sm);
+        border: 1px solid var(--brand-border); background: var(--brand-card); color: var(--brand-foreground);
+        font-size: 13px; cursor: pointer; transition: all .2s ease; display: inline-flex; align-items: center; justify-content: center;
+      }
+      .pg-btn:hover:not(:disabled):not(.active) { border-color: var(--brand-primary); color: var(--brand-primary); }
+      .pg-btn.active { background: var(--brand-primary); color: var(--brand-primary-foreground); border-color: var(--brand-primary); font-weight: 600; }
+      .pg-btn:disabled { opacity: .35; cursor: not-allowed; }
+      .pg-ellipsis { color: var(--brand-muted-foreground); padding: 0 4px; user-select: none; }
+      .pg-btn svg { width: 16px; height: 16px; }
+
+      /* ---------- Lightbox ---------- */
+      .lightbox {
+        position: fixed; inset: 0; z-index: 100; display: flex;
+        opacity: 0; visibility: hidden; transition: opacity .25s ease, visibility .25s ease;
+        background: rgba(0, 0, 0, 0.92);
+      }
+      .lightbox.open { opacity: 1; visibility: visible; }
+      .lb-layout { position: relative; display: flex; width: 100%; height: 100%; }
+
+      .lb-stage-area {
+        flex: 1 1 auto; position: relative; display: flex; align-items: center; justify-content: center;
+        min-width: 0; min-height: 0; overflow: hidden;
+      }
+      .lb-stage {
+        position: relative; display: flex; align-items: center; justify-content: center;
+        width: 100%; height: 100%; cursor: zoom-in;
+      }
+      .lb-image {
+        max-height: 90vh; max-width: 100%; object-fit: contain; display: block;
+        user-select: none; -webkit-user-drag: none; transition: transform .08s linear;
+        will-change: transform; transform-origin: center center;
+      }
+      .lb-arrow {
+        position: absolute; top: 50%; transform: translateY(-50%); z-index: 5;
+        width: 46px; height: 46px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+        border: 1px solid rgba(255,255,255,0.15); background: rgba(20,20,22,0.6); color: #fff;
+        cursor: pointer; transition: all .2s ease; backdrop-filter: blur(6px);
+      }
+      .lb-arrow:hover { background: var(--brand-primary); color: var(--brand-primary-foreground); border-color: var(--brand-primary); }
+      .lb-arrow.prev { left: 18px; }
+      .lb-arrow.next { right: 18px; }
+      .lb-arrow svg { width: 22px; height: 22px; }
+      .lb-arrow:disabled { opacity: .25; cursor: not-allowed; }
+      .lb-arrow:disabled:hover { background: rgba(20,20,22,0.6); color: #fff; border-color: rgba(255,255,255,0.15); }
+
+      .lb-zoom-bar {
+        position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%); z-index: 5;
+        display: flex; align-items: center; gap: 6px; padding: 6px 8px; border-radius: 999px;
+        background: rgba(20,20,22,0.75); border: 1px solid rgba(255,255,255,0.12); backdrop-filter: blur(6px);
+      }
+      .lb-zoom-bar button {
+        width: 32px; height: 32px; border-radius: 50%; border: none; cursor: pointer;
+        background: transparent; color: #fff; display: flex; align-items: center; justify-content: center; transition: background .2s ease;
+      }
+      .lb-zoom-bar button:hover { background: rgba(255,255,255,0.15); }
+      .lb-zoom-bar button svg { width: 16px; height: 16px; }
+      .lb-zoom-pct { color: #fff; font-size: 12px; min-width: 46px; text-align: center; font-variant-numeric: tabular-nums; }
+
+      .lb-close-btn {
+        position: absolute; top: 16px; right: 16px; z-index: 60;
+        width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+        border: 1px solid rgba(255,255,255,0.15); background: rgba(20,20,22,0.7); color: #fff;
+        cursor: pointer; transition: all .2s ease; backdrop-filter: blur(6px);
+      }
+      .lb-close-btn:hover { background: var(--brand-danger); border-color: var(--brand-danger); }
+      .lb-close-btn svg { width: 20px; height: 20px; }
+
+      .lb-counter {
+        position: absolute; top: 20px; left: 20px; z-index: 60;
+        font-size: 13px; color: rgba(255,255,255,0.75); background: rgba(20,20,22,0.6);
+        padding: 5px 12px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.1);
+      }
+
+      /* Prompt panel */
+      .lb-panel {
+        flex: 0 0 400px; background: var(--brand-popover); border-left: 1px solid var(--brand-border);
+        display: flex; flex-direction: column; padding: 20px; overflow: hidden;
+      }
+      .lb-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 14px; }
+      .lb-tag {
+        padding: 4px 11px; border-radius: 999px; font-size: 12px; border: 1px solid var(--brand-border);
+        background: var(--brand-card); color: var(--brand-foreground);
+      }
+      .lb-tag.cat { background: var(--brand-primary); color: var(--brand-primary-foreground); border-color: var(--brand-primary); font-weight: 600; }
+      .lb-copy {
+        display: inline-flex; align-items: center; gap: 7px; padding: 8px 16px; border-radius: var(--brand-radius-sm);
+        border: 1px solid var(--brand-border); background: var(--brand-card); color: var(--brand-foreground);
+        font-size: 13px; cursor: pointer; transition: all .2s ease; align-self: flex-start;
+      }
+      .lb-copy:hover { border-color: var(--brand-primary); color: var(--brand-primary); }
+      .lb-copy.copied { background: var(--brand-success); color: #0c0c0e; border-color: var(--brand-success); }
+      .lb-copy svg { width: 15px; height: 15px; }
+      .lb-prompt {
+        margin-top: 14px; flex: 1 1 auto; overflow-y: auto; font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
+        font-size: 14px; line-height: 1.7; color: var(--brand-foreground); white-space: pre-wrap; word-break: break-word;
+        padding-right: 6px;
+      }
+      .lb-prompt::-webkit-scrollbar { width: 6px; }
+      .lb-prompt::-webkit-scrollbar-thumb { background: var(--brand-border); border-radius: 3px; }
+      .lb-filename { margin-top: 12px; font-size: 12px; color: var(--brand-muted-foreground); word-break: break-all; }
+
+      @media (max-width: 900px) {
+        .lb-layout { flex-direction: column; }
+        .lb-panel { flex: 0 0 auto; max-height: 42vh; border-left: none; border-top: 1px solid var(--brand-border); }
+        .lb-image { max-height: 52vh; }
+        .lb-arrow.prev { left: 10px; }
+        .lb-arrow.next { right: 10px; }
+      }
+    </style>
+    <main>
+      <!-- Header -->
+      <header class="gallery-header">
+        <div class="gallery-container">
+          <h1 class="gallery-title">AI <span class="accent">画廊</span></h1>
+          <p class="gallery-subtitle">共 <span class="num" id="total-count">0</span> 张 · 当前筛选 <span class="num" id="filtered-count">0</span> 张</p>
+        </div>
+      </header>
+
+      <!-- Filter bar (sticky) -->
+      <div class="filter-bar">
+        <div class="gallery-container">
+          <div class="filter-bar-inner">
+            <div class="chips" id="chips"></div>
+            <div class="search-wrap">
+              <span class="search-icon"><i data-lucide="search" style="width:16px;height:16px;"></i></span>
+              <input type="text" id="search-input" class="search-input" placeholder="搜索提示词 / 角色 / 风格…" autocomplete="off" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gallery grid -->
+      <section class="gallery-container">
+        <div class="gallery-grid" id="gallery-grid"></div>
+
+        <!-- Empty state -->
+        <div class="empty-state" id="empty-state">
+          <div class="empty-icon"><i data-lucide="image-off"></i></div>
+          <p>没有找到匹配的图片</p>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination" id="pagination"></div>
+      </section>
+
+      <!-- Lightbox -->
+      <div class="lightbox" id="lightbox" aria-hidden="true">
+        <div class="lb-layout">
+          <span class="lb-counter" id="lb-counter"></span>
+          <button class="lb-close-btn" id="lb-close" title="关闭 (ESC)"><i data-lucide="x"></i></button>
+
+          <div class="lb-stage-area">
+            <button class="lb-arrow prev" id="lb-prev" title="上一张 (←)"><i data-lucide="chevron-left"></i></button>
+            <div class="lb-stage" id="lb-stage">
+              <img class="lb-image" id="lb-image" alt="" />
+              <div class="lb-zoom-bar">
+                <button id="lb-zoom-out" title="缩小 (-)"><i data-lucide="minus"></i></button>
+                <span class="lb-zoom-pct" id="lb-zoom-pct">100%</span>
+                <button id="lb-zoom-in" title="放大 (+)"><i data-lucide="plus"></i></button>
+                <button id="lb-zoom-reset" title="重置 (0)"><i data-lucide="rotate-ccw"></i></button>
+              </div>
+            </div>
+            <button class="lb-arrow next" id="lb-next" title="下一张 (→)"><i data-lucide="chevron-right"></i></button>
+          </div>
+
+          <aside class="lb-panel" id="lb-panel">
+            <div class="lb-tags" id="lb-tags"></div>
+            <button class="lb-copy" id="lb-copy"><i data-lucide="copy"></i><span id="lb-copy-text">复制提示词</span></button>
+            <div class="lb-prompt" id="lb-prompt"></div>
+            <div class="lb-filename" id="lb-filename"></div>
+          </aside>
+        </div>
+      </div>
+    </main>
+    <script src="../assets/gallery-data.js"></script>
+    <script>
+      (function () {
+        'use strict';
+
+        var IMAGE_BASES = {
+          '20260731': 'D:/comfyui/TRAE/tupian/20260731/',
+          '20260802': 'D:/comfyui/TRAE/tupian/20260802/',
+          '20260803': 'D:/comfyui/TRAE/tupian/20260803/',
+          '20260811': 'D:/comfyui/TRAE/tupian/20260811/',
+          '20260813': 'D:/comfyui/TRAE/tupian/20260813/',
+          '20260814': 'D:/comfyui/TRAE/tupian/20260814/',
+          '20260815': 'D:/comfyui/TRAE/tupian/20260815/',
+          '20260817': 'D:/comfyui/TRAE/tupian/20260817/',
+          '20260819': 'D:/comfyui/TRAE/tupian/20260819/',
+          '20260820': 'D:/comfyui/TRAE/tupian/20260820/',
+          '20260821': 'D:/comfyui/TRAE/tupian/20260821/',
+          '20260823': 'D:/comfyui/TRAE/tupian/20260823/',
+          '20260825': 'D:/comfyui/TRAE/tupian/20260825/'
+        };
+        function imgSrc(item) {
+          return (IMAGE_BASES[item.d] || IMAGE_BASES['20260731']) + item.f;
+        }
+
+        var CATEGORIES = [
+          { code: 'all', name: '全部' },
+          { code: 'anime', name: '二次元' },
+          { code: 'real', name: '写实' },
+          { code: 'retro', name: '复古' },
+          { code: 'guofeng', name: '国风' },
+          { code: 'dunhuang', name: '敦煌' },
+          { code: 'sexy', name: '性感' },
+          { code: 'fugu', name: '性感复古' },
+          { code: 'xieshi', name: '性感写实' },
+          { code: 'ccd', name: '性感CCD' },
+          { code: 'jiayi', name: '性感嫁衣' },
+          { code: 'xhs', name: '小红书' },
+          { code: 'diff', name: '仙侠' },
+          { code: 'qn', name: '千禧怀旧' },
+          { code: 'ty', name: '青春日记' },
+          { code: 'tyy', name: '青春记忆' },
+          { code: 'stu', name: '学生旧照' },
+          { code: 'tea', name: '教师旧照' }
+        ];
+
+        var PER_PAGE = 80;
+
+        var allData = (window.GALLERY_DATA && Array.isArray(window.GALLERY_DATA)) ? window.GALLERY_DATA : [];
+        var filtered = [];
+        var state = { category: 'all', search: '', page: 1 };
+
+        // Lightbox state
+        var lbIndex = 0;
+        var lbZoom = 1, lbPanX = 0, lbPanY = 0;
+        var isDragging = false, dragStartX = 0, dragStartY = 0, panStartX = 0, panStartY = 0;
+        var copyTimer = null;
+
+        // DOM refs
+        var elGrid = document.getElementById('gallery-grid');
+        var elEmpty = document.getElementById('empty-state');
+        var elPagination = document.getElementById('pagination');
+        var elChips = document.getElementById('chips');
+        var elSearch = document.getElementById('search-input');
+        var elTotal = document.getElementById('total-count');
+        var elFiltered = document.getElementById('filtered-count');
+
+        var elLightbox = document.getElementById('lightbox');
+        var elLbImage = document.getElementById('lb-image');
+        var elLbStage = document.getElementById('lb-stage');
+        var elLbCounter = document.getElementById('lb-counter');
+        var elLbTags = document.getElementById('lb-tags');
+        var elLbPrompt = document.getElementById('lb-prompt');
+        var elLbFilename = document.getElementById('lb-filename');
+        var elLbCopy = document.getElementById('lb-copy');
+        var elLbCopyText = document.getElementById('lb-copy-text');
+        var elLbZoomPct = document.getElementById('lb-zoom-pct');
+
+        // ---------- Utilities ----------
+        function escapeHtml(str) {
+          if (str == null) return '';
+          return String(str)
+            .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+        }
+
+        function refreshIcons() {
+          if (window.lucide && typeof window.lucide.createIcons === 'function') {
+            window.lucide.createIcons();
+          }
+        }
+
+        // ---------- Filter chips ----------
+        function renderChips() {
+          elChips.innerHTML = '';
+          CATEGORIES.forEach(function (cat) {
+            var btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'chip' + (state.category === cat.code ? ' active' : '');
+            btn.textContent = cat.name;
+            btn.addEventListener('click', function () {
+              if (state.category === cat.code) return;
+              state.category = cat.code;
+              state.page = 1;
+              renderChips();
+              applyAndRender();
+            });
+            elChips.appendChild(btn);
+          });
+        }
+
+        // ---------- Search (debounced) ----------
+        var searchTimer = null;
+        elSearch.addEventListener('input', function () {
+          clearTimeout(searchTimer);
+          var val = elSearch.value;
+          searchTimer = setTimeout(function () {
+            state.search = val.trim().toLowerCase();
+            state.page = 1;
+            applyAndRender();
+          }, 300);
+        });
+
+        // ---------- Filtering ----------
+        function computeFiltered() {
+          var q = state.search;
+          filtered = allData.filter(function (item) {
+            if (state.category !== 'all' && item.c !== state.category) return false;
+            if (q) {
+              var hay = ((item.p || '') + ' ' + (item.ch || '') + ' ' + (item.a || '')).toLowerCase();
+              if (hay.indexOf(q) === -1) return false;
+            }
+            return true;
+          });
+        }
+
+        // ---------- Render grid ----------
+        function renderGrid() {
+          elGrid.innerHTML = '';
+          var total = filtered.length;
+          var start = (state.page - 1) * PER_PAGE;
+          var end = Math.min(start + PER_PAGE, total);
+          var pageItems = filtered.slice(start, end);
+
+          var frag = document.createDocumentFragment();
+          pageItems.forEach(function (item, i) {
+            frag.appendChild(createCard(item, start + i));
+          });
+          elGrid.appendChild(frag);
+        }
+
+        function createCard(item, idx) {
+          var card = document.createElement('div');
+          card.className = 'card';
+
+          var wrap = document.createElement('div');
+          wrap.className = 'card-img-wrap loading';
+
+          var img = document.createElement('img');
+          img.className = 'card-img';
+          img.loading = 'lazy';
+          img.alt = item.a || item.cn || '';
+          img.src = imgSrc(item);
+          (function (w, im) {
+            im.addEventListener('load', function () {
+              w.classList.remove('loading');
+              im.classList.add('loaded');
+            });
+            im.addEventListener('error', function () {
+              w.classList.remove('loading');
+              w.classList.add('error');
+            });
+          })(wrap, img);
+
+          var badge = document.createElement('span');
+          badge.className = 'card-badge';
+          badge.textContent = item.cn || '';
+
+          var overlay = document.createElement('div');
+          overlay.className = 'card-overlay';
+          if (item.a) {
+            var ovArt = document.createElement('div');
+            ovArt.className = 'card-overlay-art';
+            ovArt.textContent = item.a;
+            overlay.appendChild(ovArt);
+          }
+          if (item.ch) {
+            var ovCh = document.createElement('div');
+            ovCh.className = 'card-overlay-ch';
+            ovCh.textContent = item.ch;
+            overlay.appendChild(ovCh);
+          }
+
+          wrap.appendChild(img);
+          wrap.appendChild(badge);
+          wrap.appendChild(overlay);
+          card.appendChild(wrap);
+
+          card.addEventListener('click', function () { openLightbox(idx); });
+          return card;
+        }
+
+        // ---------- Pagination ----------
+        function renderPagination() {
+          elPagination.innerHTML = '';
+          var total = filtered.length;
+          var totalPages = Math.max(1, Math.ceil(total / PER_PAGE));
+          if (totalPages < 1) totalPages = 1;
+          if (state.page > totalPages) state.page = totalPages;
+
+          var start = (state.page - 1) * PER_PAGE + 1;
+          var end = Math.min(state.page * PER_PAGE, total);
+          if (total === 0) { start = 0; end = 0; }
+
+          // info
+          var info = document.createElement('div');
+          info.className = 'pg-info';
+          info.innerHTML = '第 <span class="num">' + start + '–' + end + '</span> 张 / 共 <span class="num">' + total + '</span> 张';
+          elPagination.appendChild(info);
+
+          if (total === 0) return;
+
+          // First
+          elPagination.appendChild(makePgBtn('«', 1, state.page === 1, '首页'));
+          // Prev
+          var prevBtn = makePgBtn('‹', state.page - 1, state.page === 1, '上一页');
+          elPagination.appendChild(prevBtn);
+
+          // page numbers
+          var pages = getPageList(state.page, totalPages);
+          pages.forEach(function (p) {
+            if (p === '…') {
+              var span = document.createElement('span');
+              span.className = 'pg-ellipsis';
+              span.textContent = '…';
+              elPagination.appendChild(span);
+            } else {
+              var b = makePgBtn(String(p), p, false, '第' + p + '页');
+              if (p === state.page) b.classList.add('active');
+              elPagination.appendChild(b);
+            }
+          });
+
+          // Next
+          var nextBtn = makePgBtn('›', state.page + 1, state.page === totalPages, '下一页');
+          elPagination.appendChild(nextBtn);
+          // Last
+          elPagination.appendChild(makePgBtn('»', totalPages, state.page === totalPages, '末页'));
+        }
+
+        function makePgBtn(label, target, disabled, title) {
+          var btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'pg-btn';
+          btn.textContent = label;
+          if (title) btn.title = title;
+          if (disabled) btn.disabled = true;
+          btn.addEventListener('click', function () {
+            if (disabled) return;
+            if (target < 1 || target > Math.ceil(filtered.length / PER_PAGE)) return;
+            state.page = target;
+            renderGrid();
+            renderPagination();
+            scrollTopGrid();
+          });
+          return btn;
+        }
+
+        function getPageList(current, total) {
+          var arr = [];
+          if (total <= 7) {
+            for (var i = 1; i <= total; i++) arr.push(i);
+            return arr;
+          }
+          arr.push(1);
+          if (current > 4) arr.push('…');
+          var s = Math.max(2, current - 1);
+          var e = Math.min(total - 1, current + 1);
+          for (var j = s; j <= e; j++) arr.push(j);
+          if (current < total - 3) arr.push('…');
+          arr.push(total);
+          return arr;
+        }
+
+        function scrollTopGrid() {
+          var gridTop = elGrid.getBoundingClientRect().top + window.pageYOffset;
+          var filterBottom = 0;
+          var filterBar = document.querySelector('.filter-bar');
+          if (filterBar) filterBottom = filterBar.offsetHeight;
+          window.scrollTo({ top: Math.max(0, gridTop - filterBottom - 12), behavior: 'smooth' });
+        }
+
+        // ---------- Master render ----------
+        function applyAndRender() {
+          computeFiltered();
+          var totalPages = Math.max(1, Math.ceil(filtered.length / PER_PAGE));
+          if (state.page > totalPages) state.page = totalPages;
+          if (state.page < 1) state.page = 1;
+
+          elTotal.textContent = allData.length;
+          elFiltered.textContent = filtered.length;
+
+          if (filtered.length === 0) {
+            elGrid.innerHTML = '';
+            elEmpty.classList.add('show');
+            elPagination.innerHTML = '';
+            refreshIcons();
+            return;
+          }
+          elEmpty.classList.remove('show');
+          renderGrid();
+          renderPagination();
+          refreshIcons();
+        }
+
+        // ---------- Lightbox ----------
+        function openLightbox(idx) {
+          lbIndex = idx;
+          elLightbox.classList.add('open');
+          elLightbox.setAttribute('aria-hidden', 'false');
+          document.body.style.overflow = 'hidden';
+          loadLightboxItem();
+          refreshIcons();
+        }
+
+        function closeLightbox() {
+          elLightbox.classList.remove('open');
+          elLightbox.setAttribute('aria-hidden', 'true');
+          document.body.style.overflow = '';
+          resetZoom(false);
+        }
+
+        function loadLightboxItem() {
+          var item = filtered[lbIndex];
+          if (!item) return;
+          resetZoom(false);
+
+          elLbImage.src = imgSrc(item);
+          elLbImage.alt = item.a || '';
+
+          elLbCounter.textContent = (lbIndex + 1) + ' / ' + filtered.length;
+
+          // tags
+          elLbTags.innerHTML = '';
+          elLbTags.appendChild(makeTag(item.cn || '', 'cat'));
+          if (item.a) elLbTags.appendChild(makeTag(item.a, ''));
+          if (item.ch) elLbTags.appendChild(makeTag(item.ch, ''));
+
+          elLbPrompt.textContent = (item.p || '') + (item.w && item.h ? '\n\n尺寸：' + item.w + 'x' + item.h : '');
+
+          elLbFilename.textContent = item.f || '';
+
+          // nav button states
+          document.getElementById('lb-prev').disabled = lbIndex <= 0;
+          document.getElementById('lb-next').disabled = lbIndex >= filtered.length - 1;
+
+          // reset copy button
+          if (copyTimer) { clearTimeout(copyTimer); copyTimer = null; }
+          elLbCopy.classList.remove('copied');
+          elLbCopyText.textContent = '复制提示词';
+        }
+
+        function makeTag(text, extra) {
+          var span = document.createElement('span');
+          span.className = 'lb-tag' + (extra ? ' ' + extra : '');
+          span.textContent = text;
+          return span;
+        }
+
+        function navLightbox(dir) {
+          var ni = lbIndex + dir;
+          if (ni < 0 || ni >= filtered.length) return;
+          lbIndex = ni;
+          loadLightboxItem();
+        }
+
+        // ---------- Zoom & Pan ----------
+        function applyTransform() {
+          elLbImage.style.transform = 'translate(' + lbPanX + 'px, ' + lbPanY + 'px) scale(' + lbZoom + ')';
+          elLbZoomPct.textContent = Math.round(lbZoom * 100) + '%';
+          if (lbZoom > 1) {
+            elLbStage.style.cursor = isDragging ? 'grabbing' : 'grab';
+          } else {
+            elLbStage.style.cursor = 'zoom-in';
+          }
+        }
+
+        function setZoom(z) {
+          var nz = Math.round(z / 0.25) * 0.25;
+          // fix float rounding
+          nz = Math.round(nz * 100) / 100;
+          nz = Math.max(0.5, Math.min(5, nz));
+          lbZoom = nz;
+          if (lbZoom <= 1) { lbPanX = 0; lbPanY = 0; }
+          applyTransform();
+        }
+
+        function resetZoom(apply) {
+          lbZoom = 1; lbPanX = 0; lbPanY = 0;
+          if (apply !== false) applyTransform();
+          else {
+            elLbImage.style.transform = '';
+            elLbZoomPct.textContent = '100%';
+            elLbStage.style.cursor = 'zoom-in';
+          }
+        }
+
+        document.getElementById('lb-zoom-in').addEventListener('click', function () { setZoom(lbZoom + 0.25); });
+        document.getElementById('lb-zoom-out').addEventListener('click', function () { setZoom(lbZoom - 0.25); });
+        document.getElementById('lb-zoom-reset').addEventListener('click', function () { resetZoom(true); });
+
+        elLbStage.addEventListener('wheel', function (e) {
+          if (!elLightbox.classList.contains('open')) return;
+          e.preventDefault();
+          var delta = e.deltaY < 0 ? 0.25 : -0.25;
+          setZoom(lbZoom + delta);
+        }, { passive: false });
+
+        // drag to pan
+        elLbStage.addEventListener('mousedown', function (e) {
+          if (lbZoom <= 1) return;
+          isDragging = true;
+          dragStartX = e.clientX; dragStartY = e.clientY;
+          panStartX = lbPanX; panStartY = lbPanY;
+          elLbStage.style.cursor = 'grabbing';
+          e.preventDefault();
+        });
+        window.addEventListener('mousemove', function (e) {
+          if (!isDragging) return;
+          lbPanX = panStartX + (e.clientX - dragStartX);
+          lbPanY = panStartY + (e.clientY - dragStartY);
+          applyTransform();
+        });
+        window.addEventListener('mouseup', function () {
+          if (!isDragging) return;
+          isDragging = false;
+          elLbStage.style.cursor = lbZoom > 1 ? 'grab' : 'zoom-in';
+        });
+
+        // touch drag (basic)
+        var touchStartX = 0, touchStartY = 0, touchPanX = 0, touchPanY = 0, touchDragging = false;
+        elLbStage.addEventListener('touchstart', function (e) {
+          if (lbZoom <= 1 || e.touches.length !== 1) return;
+          touchDragging = true;
+          touchStartX = e.touches[0].clientX; touchStartY = e.touches[0].clientY;
+          touchPanX = lbPanX; touchPanY = lbPanY;
+        }, { passive: true });
+        elLbStage.addEventListener('touchmove', function (e) {
+          if (!touchDragging || e.touches.length !== 1) return;
+          lbPanX = touchPanX + (e.touches[0].clientX - touchStartX);
+          lbPanY = touchPanY + (e.touches[0].clientY - touchStartY);
+          applyTransform();
+        }, { passive: true });
+        elLbStage.addEventListener('touchend', function () { touchDragging = false; });
+
+        // ---------- Lightbox controls ----------
+        document.getElementById('lb-close').addEventListener('click', closeLightbox);
+        document.getElementById('lb-prev').addEventListener('click', function () { navLightbox(-1); });
+        document.getElementById('lb-next').addEventListener('click', function () { navLightbox(1); });
+
+        // click on backdrop area (stage-area background, not image/panel) to close
+        elLbStage.addEventListener('click', function (e) {
+          // only close if clicking the stage background (not the image itself, and not zoomed for panning)
+          if (e.target === elLbStage && lbZoom <= 1) closeLightbox();
+        });
+        var stageArea = document.querySelector('.lb-stage-area');
+        if (stageArea) {
+          stageArea.addEventListener('click', function (e) {
+            if (e.target === stageArea && lbZoom <= 1) closeLightbox();
+          });
+        }
+
+        // ---------- Copy ----------
+        elLbCopy.addEventListener('click', function () {
+          var text = elLbPrompt.textContent || '';
+          if (!text) return;
+          function showCopied() {
+            elLbCopy.classList.add('copied');
+            elLbCopyText.textContent = '已复制';
+            if (copyTimer) clearTimeout(copyTimer);
+            copyTimer = setTimeout(function () {
+              elLbCopy.classList.remove('copied');
+              elLbCopyText.textContent = '复制提示词';
+            }, 2000);
+          }
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(showCopied).catch(function () {
+              fallbackCopy(text, showCopied);
+            });
+          } else {
+            fallbackCopy(text, showCopied);
+          }
+        });
+
+        function fallbackCopy(text, onOk) {
+          try {
+            var ta = document.createElement('textarea');
+            ta.value = text;
+            ta.setAttribute('readonly', '');
+            ta.style.position = 'fixed';
+            ta.style.top = '-9999px';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            var ok = document.execCommand('copy');
+            document.body.removeChild(ta);
+            if (ok && onOk) onOk();
+            else alert('复制失败，请手动选择文本复制。');
+          } catch (err) {
+            alert('复制失败，请手动选择文本复制。');
+          }
+        }
+
+        // ---------- Keyboard ----------
+        document.addEventListener('keydown', function (e) {
+          if (!elLightbox.classList.contains('open')) return;
+          var tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : '';
+          // allow shortcuts in lightbox regardless
+          switch (e.key) {
+            case 'Escape': e.preventDefault(); closeLightbox(); break;
+            case 'ArrowLeft': e.preventDefault(); navLightbox(-1); break;
+            case 'ArrowRight': e.preventDefault(); navLightbox(1); break;
+            case '+': case '=': e.preventDefault(); setZoom(lbZoom + 0.25); break;
+            case '-': case '_': e.preventDefault(); setZoom(lbZoom - 0.25); break;
+            case '0': e.preventDefault(); resetZoom(true); break;
+          }
+        });
+
+        // ---------- Init ----------
+        renderChips();
+        applyAndRender();
+        refreshIcons();
+      })();
+    </script>
+</body>
+</html>

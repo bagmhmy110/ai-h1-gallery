@@ -1,0 +1,12 @@
+# Preflight temp files
+.preflight/
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo

@@ -1,0 +1,24 @@
+:root {
+  --brand-background: #0c0c0e;
+  --brand-foreground: #ededf0;
+  --brand-card: #161618;
+  --brand-card-foreground: #ededf0;
+  --brand-popover: #1c1c1f;
+  --brand-popover-foreground: #ededf0;
+  --brand-primary: #c9a96e;
+  --brand-primary-foreground: #0c0c0e;
+  --brand-muted: #1c1c1f;
+  --brand-muted-foreground: #8a8a92;
+  --brand-border: #252528;
+  --brand-input: #252528;
+  --brand-ring: #c9a96e;
+  --brand-radius-sm: 6px;
+  --brand-radius-md: 10px;
+  --brand-radius-lg: 14px;
+  --brand-radius-small: 6px;
+  --brand-radius-medium: 10px;
+  --brand-radius-large: 14px;
+  --brand-success: #4ade80;
+  --brand-warning: #fbbf24;
+  --brand-danger: #f87171;
+}
