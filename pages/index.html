@@ -422,20 +422,21 @@
       (function () {
         'use strict';
 
+        var HF_BASE = 'https://huggingface.co/datasets/LIUFAFA/ai-h1-gallery/resolve/main/';
         var IMAGE_BASES = {
-          '20260731': 'D:/comfyui/TRAE/tupian/20260731/',
-          '20260802': 'D:/comfyui/TRAE/tupian/20260802/',
-          '20260803': 'D:/comfyui/TRAE/tupian/20260803/',
-          '20260811': 'D:/comfyui/TRAE/tupian/20260811/',
-          '20260813': 'D:/comfyui/TRAE/tupian/20260813/',
-          '20260814': 'D:/comfyui/TRAE/tupian/20260814/',
-          '20260815': 'D:/comfyui/TRAE/tupian/20260815/',
-          '20260817': 'D:/comfyui/TRAE/tupian/20260817/',
-          '20260819': 'D:/comfyui/TRAE/tupian/20260819/',
-          '20260820': 'D:/comfyui/TRAE/tupian/20260820/',
-          '20260821': 'D:/comfyui/TRAE/tupian/20260821/',
-          '20260823': 'D:/comfyui/TRAE/tupian/20260823/',
-          '20260825': 'D:/comfyui/TRAE/tupian/20260825/'
+          '20260731': HF_BASE + '20260731/',
+          '20260802': HF_BASE + '20260802/',
+          '20260803': HF_BASE + '20260803/',
+          '20260811': HF_BASE + '20260811/',
+          '20260813': HF_BASE + '20260813/',
+          '20260814': HF_BASE + '20260814/',
+          '20260815': HF_BASE + '20260815/',
+          '20260817': HF_BASE + '20260817/',
+          '20260819': HF_BASE + '20260819/',
+          '20260820': HF_BASE + '20260820/',
+          '20260821': HF_BASE + '20260821/',
+          '20260823': HF_BASE + '20260823/',
+          '20260825': HF_BASE + '20260825/'
         };
         function imgSrc(item) {
           return (IMAGE_BASES[item.d] || IMAGE_BASES['20260731']) + item.f;
