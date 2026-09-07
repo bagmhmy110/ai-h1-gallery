@@ -29,7 +29,6 @@
   --brand-warning: #fbbf24;
   --brand-danger: #f87171;
 }
-
     </style>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.1/dist/index.global.js"></script>
     <script src="https://unpkg.com/lucide@1.8.0/dist/umd/lucide.min.js"></script>
@@ -54,87 +53,41 @@
   }
   @layer base {
     body { background: var(--brand-background); color: var(--brand-foreground); }
-    td, th { @apply break-words; word-break: break-all; word-break: auto-phrase; }
-    th { @apply whitespace-nowrap; }
   }
     </style>
     <style id="semantic-token-fallback">
       .bg-background { background-color: var(--brand-background); }
       .text-background { color: var(--brand-background); }
-      .border-background { border-color: var(--brand-background); }
-      .ring-background { --tw-ring-color: var(--brand-background); }
       .bg-foreground { background-color: var(--brand-foreground); }
       .text-foreground { color: var(--brand-foreground); }
-      .border-foreground { border-color: var(--brand-foreground); }
-      .ring-foreground { --tw-ring-color: var(--brand-foreground); }
       .bg-card { background-color: var(--brand-card); }
-      .text-card { color: var(--brand-card); }
-      .border-card { border-color: var(--brand-card); }
-      .ring-card { --tw-ring-color: var(--brand-card); }
-      .bg-card-foreground { background-color: var(--brand-card-foreground); }
       .text-card-foreground { color: var(--brand-card-foreground); }
-      .border-card-foreground { border-color: var(--brand-card-foreground); }
-      .ring-card-foreground { --tw-ring-color: var(--brand-card-foreground); }
       .bg-popover { background-color: var(--brand-popover); }
-      .text-popover { color: var(--brand-popover); }
-      .border-popover { border-color: var(--brand-popover); }
-      .ring-popover { --tw-ring-color: var(--brand-popover); }
-      .bg-popover-foreground { background-color: var(--brand-popover-foreground); }
       .text-popover-foreground { color: var(--brand-popover-foreground); }
-      .border-popover-foreground { border-color: var(--brand-popover-foreground); }
-      .ring-popover-foreground { --tw-ring-color: var(--brand-popover-foreground); }
       .bg-primary { background-color: var(--brand-primary); }
       .text-primary { color: var(--brand-primary); }
-      .border-primary { border-color: var(--brand-primary); }
-      .ring-primary { --tw-ring-color: var(--brand-primary); }
       .bg-primary-foreground { background-color: var(--brand-primary-foreground); }
       .text-primary-foreground { color: var(--brand-primary-foreground); }
-      .border-primary-foreground { border-color: var(--brand-primary-foreground); }
-      .ring-primary-foreground { --tw-ring-color: var(--brand-primary-foreground); }
       .bg-muted { background-color: var(--brand-muted); }
-      .text-muted { color: var(--brand-muted); }
-      .border-muted { border-color: var(--brand-muted); }
-      .ring-muted { --tw-ring-color: var(--brand-muted); }
-      .bg-muted-foreground { background-color: var(--brand-muted-foreground); }
       .text-muted-foreground { color: var(--brand-muted-foreground); }
-      .border-muted-foreground { border-color: var(--brand-muted-foreground); }
-      .ring-muted-foreground { --tw-ring-color: var(--brand-muted-foreground); }
       .bg-border { background-color: var(--brand-border); }
-      .text-border { color: var(--brand-border); }
-      .border-border { border-color: var(--brand-border); }
-      .ring-border { --tw-ring-color: var(--brand-border); }
       .bg-input { background-color: var(--brand-input); }
-      .text-input { color: var(--brand-input); }
-      .border-input { border-color: var(--brand-input); }
-      .ring-input { --tw-ring-color: var(--brand-input); }
-      .bg-ring { background-color: var(--brand-ring); }
-      .text-ring { color: var(--brand-ring); }
-      .border-ring { border-color: var(--brand-ring); }
-      .ring-ring { --tw-ring-color: var(--brand-ring); }
     </style>
     <style>
       .no-scrollbar::-webkit-scrollbar { display: none; }
       .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
       [data-icon] {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        -webkit-mask-size: contain;
-        mask-size: contain;
-        -webkit-mask-repeat: no-repeat;
-        mask-repeat: no-repeat;
-        -webkit-mask-position: center;
-        mask-position: center;
+        display: inline-flex; align-items: center; justify-content: center;
+        -webkit-mask-size: contain; mask-size: contain;
+        -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+        -webkit-mask-position: center; mask-position: center;
         background-color: currentColor;
       }
     </style>
 </head>
 <body class="min-h-screen font-sans antialiased">
     <style id="gallery-styles">
-      /* ---------- Layout ---------- */
       .gallery-container { width: 100%; max-width: 1600px; margin: 0 auto; padding: 0 20px; }
-
-      /* ---------- Header ---------- */
       .gallery-header { padding: 40px 0 28px; text-align: center; }
       .gallery-title { font-size: clamp(28px, 4vw, 42px); font-weight: 700; letter-spacing: 2px; line-height: 1.2; }
       .gallery-title .accent { color: var(--brand-primary); }
@@ -144,17 +97,40 @@
       /* ---------- Filter Bar ---------- */
       .filter-bar {
         position: sticky; top: 0; z-index: 50;
-        background: rgba(12, 12, 14, 0.82);
+        background: rgba(12, 12, 14, 0.88);
         backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
         border-bottom: 1px solid var(--brand-border);
       }
       .filter-bar-inner {
         display: flex; align-items: center; justify-content: space-between;
-        gap: 14px; padding: 12px 0; flex-wrap: wrap;
+        gap: 14px; padding: 10px 0; flex-wrap: wrap;
       }
-      .chips { display: flex; gap: 8px; flex-wrap: wrap; }
+      /* Date tabs row */
+      .date-row {
+        display: flex; gap: 6px; overflow-x: auto; padding-bottom: 6px;
+        -webkit-overflow-scrolling: touch;
+      }
+      .date-row::-webkit-scrollbar { height: 3px; }
+      .date-row::-webkit-scrollbar-thumb { background: var(--brand-border); border-radius: 2px; }
+      .date-tab {
+        padding: 6px 14px; border-radius: 8px; font-size: 13px; cursor: pointer;
+        border: 1px solid var(--brand-border); background: var(--brand-card);
+        color: var(--brand-muted-foreground); transition: all .2s ease; white-space: nowrap;
+        user-select: none; font-weight: 500;
+      }
+      .date-tab:hover { color: var(--brand-foreground); border-color: var(--brand-primary); }
+      .date-tab.active {
+        background: var(--brand-primary); color: var(--brand-primary-foreground);
+        border-color: var(--brand-primary); font-weight: 600;
+      }
+      .date-tab .date-count { font-size: 11px; opacity: .7; margin-left: 4px; }
+
+      /* Sub-category chips row */
+      .subchips-row {
+        display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+      }
       .chip {
-        padding: 7px 16px; border-radius: 999px; font-size: 13px; cursor: pointer;
+        padding: 6px 14px; border-radius: 999px; font-size: 13px; cursor: pointer;
         border: 1px solid var(--brand-border); background: var(--brand-card);
         color: var(--brand-muted-foreground); transition: all .2s ease; white-space: nowrap; user-select: none;
       }
@@ -163,7 +139,9 @@
         background: var(--brand-primary); color: var(--brand-primary-foreground);
         border-color: var(--brand-primary); font-weight: 600;
       }
-      .search-wrap { position: relative; flex: 0 1 300px; min-width: 200px; }
+      .chip .chip-count { font-size: 11px; opacity: .7; margin-left: 4px; }
+
+      .search-wrap { position: relative; flex: 0 1 280px; min-width: 180px; }
       .search-wrap .search-icon {
         position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
         color: var(--brand-muted-foreground); pointer-events: none; display: flex;
@@ -175,6 +153,9 @@
       }
       .search-input::placeholder { color: var(--brand-muted-foreground); }
       .search-input:focus { border-color: var(--brand-primary); }
+
+      .filter-divider { width: 100%; height: 1px; background: var(--brand-border); margin: 4px 0; }
+
       @media (max-width: 640px) {
         .filter-bar-inner { flex-direction: column; align-items: stretch; }
         .search-wrap { flex: 1 1 100%; }
@@ -206,9 +187,7 @@
         background: linear-gradient(100deg, #141416 30%, #1f1f23 50%, #141416 70%);
         background-size: 200% 100%; animation: shimmer 1.4s infinite;
       }
-      .card-img-wrap.error::before {
-        content: ''; position: absolute; inset: 0; background: #141416;
-      }
+      .card-img-wrap.error::before { content: ''; position: absolute; inset: 0; background: #141416; }
       .card-img-wrap.error::after {
         content: '加载失败'; position: absolute; inset: 0; display: flex;
         align-items: center; justify-content: center; color: var(--brand-muted-foreground); font-size: 12px;
@@ -231,14 +210,12 @@
       .card-overlay-art { color: var(--brand-primary); font-size: 13px; font-weight: 600; line-height: 1.3; }
       .card-overlay-ch { color: #fff; font-size: 12px; margin-top: 3px; opacity: .9; line-height: 1.3; }
 
-      /* ---------- Empty state ---------- */
       .empty-state { display: none; flex-direction: column; align-items: center; justify-content: center; padding: 90px 20px; color: var(--brand-muted-foreground); }
       .empty-state.show { display: flex; }
       .empty-state .empty-icon { margin-bottom: 16px; opacity: .5; }
       .empty-state .empty-icon svg { width: 52px; height: 52px; }
       .empty-state p { font-size: 15px; }
 
-      /* ---------- Pagination ---------- */
       .pagination { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 6px; padding: 8px 0 60px; }
       .pagination .pg-info { width: 100%; text-align: center; font-size: 13px; color: var(--brand-muted-foreground); margin-bottom: 12px; }
       .pagination .pg-info .num { color: var(--brand-foreground); font-weight: 600; }
@@ -261,7 +238,6 @@
       }
       .lightbox.open { opacity: 1; visibility: visible; }
       .lb-layout { position: relative; display: flex; width: 100%; height: 100%; }
-
       .lb-stage-area {
         flex: 1 1 auto; position: relative; display: flex; align-items: center; justify-content: center;
         min-width: 0; min-height: 0; overflow: hidden;
@@ -287,7 +263,6 @@
       .lb-arrow svg { width: 22px; height: 22px; }
       .lb-arrow:disabled { opacity: .25; cursor: not-allowed; }
       .lb-arrow:disabled:hover { background: rgba(20,20,22,0.6); color: #fff; border-color: rgba(255,255,255,0.15); }
-
       .lb-zoom-bar {
         position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%); z-index: 5;
         display: flex; align-items: center; gap: 6px; padding: 6px 8px; border-radius: 999px;
@@ -300,7 +275,6 @@
       .lb-zoom-bar button:hover { background: rgba(255,255,255,0.15); }
       .lb-zoom-bar button svg { width: 16px; height: 16px; }
       .lb-zoom-pct { color: #fff; font-size: 12px; min-width: 46px; text-align: center; font-variant-numeric: tabular-nums; }
-
       .lb-close-btn {
         position: absolute; top: 16px; right: 16px; z-index: 60;
         width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
@@ -309,14 +283,11 @@
       }
       .lb-close-btn:hover { background: var(--brand-danger); border-color: var(--brand-danger); }
       .lb-close-btn svg { width: 20px; height: 20px; }
-
       .lb-counter {
         position: absolute; top: 20px; left: 20px; z-index: 60;
         font-size: 13px; color: rgba(255,255,255,0.75); background: rgba(20,20,22,0.6);
         padding: 5px 12px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.1);
       }
-
-      /* Prompt panel */
       .lb-panel {
         flex: 0 0 400px; background: var(--brand-popover); border-left: 1px solid var(--brand-border);
         display: flex; flex-direction: column; padding: 20px; overflow: hidden;
@@ -343,7 +314,6 @@
       .lb-prompt::-webkit-scrollbar { width: 6px; }
       .lb-prompt::-webkit-scrollbar-thumb { background: var(--brand-border); border-radius: 3px; }
       .lb-filename { margin-top: 12px; font-size: 12px; color: var(--brand-muted-foreground); word-break: break-all; }
-
       @media (max-width: 900px) {
         .lb-layout { flex-direction: column; }
         .lb-panel { flex: 0 0 auto; max-height: 42vh; border-left: none; border-top: 1px solid var(--brand-border); }
@@ -353,7 +323,6 @@
       }
     </style>
     <main>
-      <!-- Header -->
       <header class="gallery-header">
         <div class="gallery-container">
           <h1 class="gallery-title">AI <span class="accent">画廊</span></h1>
@@ -361,11 +330,14 @@
         </div>
       </header>
 
-      <!-- Filter bar (sticky) -->
       <div class="filter-bar">
         <div class="gallery-container">
           <div class="filter-bar-inner">
-            <div class="chips" id="chips"></div>
+            <!-- Row 1: Date tabs -->
+            <div class="date-row" id="date-row"></div>
+            <div class="filter-divider"></div>
+            <!-- Row 2: Sub-category chips + search -->
+            <div class="subchips-row" id="subchips-row"></div>
             <div class="search-wrap">
               <span class="search-icon"><i data-lucide="search" style="width:16px;height:16px;"></i></span>
               <input type="text" id="search-input" class="search-input" placeholder="搜索提示词 / 角色 / 风格…" autocomplete="off" />
@@ -374,26 +346,19 @@
         </div>
       </div>
 
-      <!-- Gallery grid -->
       <section class="gallery-container">
         <div class="gallery-grid" id="gallery-grid"></div>
-
-        <!-- Empty state -->
         <div class="empty-state" id="empty-state">
           <div class="empty-icon"><i data-lucide="image-off"></i></div>
           <p>没有找到匹配的图片</p>
         </div>
-
-        <!-- Pagination -->
         <div class="pagination" id="pagination"></div>
       </section>
 
-      <!-- Lightbox -->
       <div class="lightbox" id="lightbox" aria-hidden="true">
         <div class="lb-layout">
           <span class="lb-counter" id="lb-counter"></span>
           <button class="lb-close-btn" id="lb-close" title="关闭 (ESC)"><i data-lucide="x"></i></button>
-
           <div class="lb-stage-area">
             <button class="lb-arrow prev" id="lb-prev" title="上一张 (←)"><i data-lucide="chevron-left"></i></button>
             <div class="lb-stage" id="lb-stage">
@@ -407,7 +372,6 @@
             </div>
             <button class="lb-arrow next" id="lb-next" title="下一张 (→)"><i data-lucide="chevron-right"></i></button>
           </div>
-
           <aside class="lb-panel" id="lb-panel">
             <div class="lb-tags" id="lb-tags"></div>
             <button class="lb-copy" id="lb-copy"><i data-lucide="copy"></i><span id="lb-copy-text">复制提示词</span></button>
@@ -444,34 +408,46 @@
           return (IMAGE_BASES[item.d] || IMAGE_BASES['20260731']) + item.f;
         }
 
-        var CATEGORIES = [
-          { code: 'all', name: '全部' },
-          { code: 'anime', name: '二次元' },
-          { code: 'wuthering', name: '鸣潮风' },
-          { code: 'guoman3d', name: '国漫3D' },
-          { code: 'real', name: '写实' },
-          { code: 'retro', name: '复古' },
-          { code: 'guofeng', name: '国风' },
-          { code: 'dunhuang', name: '敦煌' },
-          { code: 'sexy', name: '性感' },
-          { code: 'fugu', name: '性感复古' },
-          { code: 'xieshi', name: '性感写实' },
-          { code: 'ccd', name: '性感CCD' },
-          { code: 'jiayi', name: '性感嫁衣' },
-          { code: 'xhs', name: '小红书' },
-          { code: 'diff', name: '仙侠' },
-          { code: 'qn', name: '千禧怀旧' },
-          { code: 'ty', name: '青春日记' },
-          { code: 'tyy', name: '青春记忆' },
-          { code: 'stu', name: '学生旧照' },
-          { code: 'tea', name: '教师旧照' }
-        ];
+        // Category name lookup
+        var CAT_NAMES = {
+          'anime': '二次元', 'wuthering': '鸣潮风', 'guoman3d': '国漫3D',
+          'real': '写实', 'retro': '复古', 'guofeng': '国风', 'dunhuang': '敦煌',
+          'sexy': '性感', 'fugu': '性感复古', 'xieshi': '性感写实',
+          'ccd': '性感CCD', 'jiayi': '性感嫁衣', 'xhs': '小红书',
+          'diff': '仙侠', 'qn': '千禧怀旧', 'ty': '青春日记',
+          'tyy': '青春记忆', 'stu': '学生旧照', 'tea': '教师旧照'
+        };
 
         var PER_PAGE = 80;
-
         var allData = (window.GALLERY_DATA && Array.isArray(window.GALLERY_DATA)) ? window.GALLERY_DATA : [];
         var filtered = [];
-        var state = { category: 'all', search: '', page: 1 };
+        var state = { date: 'all', category: 'all', search: '', page: 1 };
+
+        // Build date list and sub-category map from data
+        var dateMap = {};      // date -> total count
+        var dateCatMap = {};   // date -> { cat: count }
+        var dateList = [];     // sorted unique dates
+
+        allData.forEach(function (item) {
+          var d = item.d;
+          if (!dateMap[d]) {
+            dateMap[d] = 0;
+            dateCatMap[d] = {};
+            dateList.push(d);
+          }
+          dateMap[d]++;
+          if (!dateCatMap[d][item.c]) dateCatMap[d][item.c] = 0;
+          dateCatMap[d][item.c]++;
+        });
+        dateList.sort();
+
+        // Format date for display: "20260827" -> "08/27"
+        function formatDate(dateStr) {
+          if (dateStr === 'all') return '全部';
+          var m = dateStr.substring(4, 6);
+          var d = dateStr.substring(6, 8);
+          return m + '/' + d;
+        }
 
         // Lightbox state
         var lbIndex = 0;
@@ -483,7 +459,8 @@
         var elGrid = document.getElementById('gallery-grid');
         var elEmpty = document.getElementById('empty-state');
         var elPagination = document.getElementById('pagination');
-        var elChips = document.getElementById('chips');
+        var elDateRow = document.getElementById('date-row');
+        var elSubchips = document.getElementById('subchips-row');
         var elSearch = document.getElementById('search-input');
         var elTotal = document.getElementById('total-count');
         var elFiltered = document.getElementById('filtered-count');
@@ -499,37 +476,115 @@
         var elLbCopyText = document.getElementById('lb-copy-text');
         var elLbZoomPct = document.getElementById('lb-zoom-pct');
 
-        // ---------- Utilities ----------
-        function escapeHtml(str) {
-          if (str == null) return '';
-          return String(str)
-            .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-        }
-
         function refreshIcons() {
           if (window.lucide && typeof window.lucide.createIcons === 'function') {
             window.lucide.createIcons();
           }
         }
 
-        // ---------- Filter chips ----------
-        function renderChips() {
-          elChips.innerHTML = '';
-          CATEGORIES.forEach(function (cat) {
-            var btn = document.createElement('button');
-            btn.type = 'button';
-            btn.className = 'chip' + (state.category === cat.code ? ' active' : '');
-            btn.textContent = cat.name;
-            btn.addEventListener('click', function () {
-              if (state.category === cat.code) return;
-              state.category = cat.code;
+        // ---------- Date tabs ----------
+        function renderDateTabs() {
+          elDateRow.innerHTML = '';
+
+          // "全部" tab
+          var allTab = document.createElement('button');
+          allTab.type = 'button';
+          allTab.className = 'date-tab' + (state.date === 'all' ? ' active' : '');
+          allTab.innerHTML = '全部<span class="date-count">' + allData.length + '</span>';
+          allTab.addEventListener('click', function () {
+            if (state.date === 'all') return;
+            state.date = 'all';
+            state.category = 'all';
+            state.page = 1;
+            renderDateTabs();
+            renderSubchips();
+            applyAndRender();
+          });
+          elDateRow.appendChild(allTab);
+
+          // Date tabs
+          dateList.forEach(function (date) {
+            var tab = document.createElement('button');
+            tab.type = 'button';
+            tab.className = 'date-tab' + (state.date === date ? ' active' : '');
+            tab.innerHTML = formatDate(date) + '<span class="date-count">' + dateMap[date] + '</span>';
+            tab.addEventListener('click', function () {
+              if (state.date === date) return;
+              state.date = date;
+              state.category = 'all';
               state.page = 1;
-              renderChips();
+              renderDateTabs();
+              renderSubchips();
               applyAndRender();
             });
-            elChips.appendChild(btn);
+            elDateRow.appendChild(tab);
           });
+        }
+
+        // ---------- Sub-category chips ----------
+        function renderSubchips() {
+          elSubchips.innerHTML = '';
+
+          // "全部" chip
+          var allChip = document.createElement('button');
+          allChip.type = 'button';
+          allChip.className = 'chip' + (state.category === 'all' ? ' active' : '');
+          var totalCount = state.date === 'all' ? allData.length : (dateMap[state.date] || 0);
+          allChip.innerHTML = '全部<span class="chip-count">' + totalCount + '</span>';
+          allChip.addEventListener('click', function () {
+            if (state.category === 'all') return;
+            state.category = 'all';
+            state.page = 1;
+            renderSubchips();
+            applyAndRender();
+          });
+          elSubchips.appendChild(allChip);
+
+          // If a specific date is selected, show its sub-categories
+          if (state.date !== 'all') {
+            var cats = dateCatMap[state.date];
+            if (cats) {
+              var sortedCats = Object.keys(cats).sort(function (a, b) { return cats[b] - cats[a]; });
+              sortedCats.forEach(function (cat) {
+                var name = CAT_NAMES[cat] || cat;
+                var chip = document.createElement('button');
+                chip.type = 'button';
+                chip.className = 'chip' + (state.category === cat ? ' active' : '');
+                chip.innerHTML = name + '<span class="chip-count">' + cats[cat] + '</span>';
+                chip.addEventListener('click', function () {
+                  if (state.category === cat) return;
+                  state.category = cat;
+                  state.page = 1;
+                  renderSubchips();
+                  applyAndRender();
+                });
+                elSubchips.appendChild(chip);
+              });
+            }
+          } else {
+            // When "all" dates selected, show all categories
+            var allCats = {};
+            allData.forEach(function (item) {
+              if (!allCats[item.c]) allCats[item.c] = 0;
+              allCats[item.c]++;
+            });
+            var sortedAll = Object.keys(allCats).sort(function (a, b) { return allCats[b] - allCats[a]; });
+            sortedAll.forEach(function (cat) {
+              var name = CAT_NAMES[cat] || cat;
+              var chip = document.createElement('button');
+              chip.type = 'button';
+              chip.className = 'chip' + (state.category === cat ? ' active' : '');
+              chip.innerHTML = name + '<span class="chip-count">' + allCats[cat] + '</span>';
+              chip.addEventListener('click', function () {
+                if (state.category === cat) return;
+                state.category = cat;
+                state.page = 1;
+                renderSubchips();
+                applyAndRender();
+              });
+              elSubchips.appendChild(chip);
+            });
+          }
         }
 
         // ---------- Search (debounced) ----------
@@ -548,6 +603,7 @@
         function computeFiltered() {
           var q = state.search;
           filtered = allData.filter(function (item) {
+            if (state.date !== 'all' && item.d !== state.date) return false;
             if (state.category !== 'all' && item.c !== state.category) return false;
             if (q) {
               var hay = ((item.p || '') + ' ' + (item.ch || '') + ' ' + (item.a || '')).toLowerCase();
@@ -575,50 +631,26 @@
         function createCard(item, idx) {
           var card = document.createElement('div');
           card.className = 'card';
-
           var wrap = document.createElement('div');
           wrap.className = 'card-img-wrap loading';
-
           var img = document.createElement('img');
           img.className = 'card-img';
           img.loading = 'lazy';
           img.alt = item.a || item.cn || '';
           img.src = imgSrc(item);
           (function (w, im) {
-            im.addEventListener('load', function () {
-              w.classList.remove('loading');
-              im.classList.add('loaded');
-            });
-            im.addEventListener('error', function () {
-              w.classList.remove('loading');
-              w.classList.add('error');
-            });
+            im.addEventListener('load', function () { w.classList.remove('loading'); im.classList.add('loaded'); });
+            im.addEventListener('error', function () { w.classList.remove('loading'); w.classList.add('error'); });
           })(wrap, img);
-
           var badge = document.createElement('span');
           badge.className = 'card-badge';
           badge.textContent = item.cn || '';
-
           var overlay = document.createElement('div');
           overlay.className = 'card-overlay';
-          if (item.a) {
-            var ovArt = document.createElement('div');
-            ovArt.className = 'card-overlay-art';
-            ovArt.textContent = item.a;
-            overlay.appendChild(ovArt);
-          }
-          if (item.ch) {
-            var ovCh = document.createElement('div');
-            ovCh.className = 'card-overlay-ch';
-            ovCh.textContent = item.ch;
-            overlay.appendChild(ovCh);
-          }
-
-          wrap.appendChild(img);
-          wrap.appendChild(badge);
-          wrap.appendChild(overlay);
+          if (item.a) { var ovArt = document.createElement('div'); ovArt.className = 'card-overlay-art'; ovArt.textContent = item.a; overlay.appendChild(ovArt); }
+          if (item.ch) { var ovCh = document.createElement('div'); ovCh.className = 'card-overlay-ch'; ovCh.textContent = item.ch; overlay.appendChild(ovCh); }
+          wrap.appendChild(img); wrap.appendChild(badge); wrap.appendChild(overlay);
           card.appendChild(wrap);
-
           card.addEventListener('click', function () { openLightbox(idx); });
           return card;
         }
@@ -628,77 +660,45 @@
           elPagination.innerHTML = '';
           var total = filtered.length;
           var totalPages = Math.max(1, Math.ceil(total / PER_PAGE));
-          if (totalPages < 1) totalPages = 1;
           if (state.page > totalPages) state.page = totalPages;
-
           var start = (state.page - 1) * PER_PAGE + 1;
           var end = Math.min(state.page * PER_PAGE, total);
           if (total === 0) { start = 0; end = 0; }
-
-          // info
           var info = document.createElement('div');
           info.className = 'pg-info';
           info.innerHTML = '第 <span class="num">' + start + '–' + end + '</span> 张 / 共 <span class="num">' + total + '</span> 张';
           elPagination.appendChild(info);
-
           if (total === 0) return;
-
-          // First
           elPagination.appendChild(makePgBtn('«', 1, state.page === 1, '首页'));
-          // Prev
-          var prevBtn = makePgBtn('‹', state.page - 1, state.page === 1, '上一页');
-          elPagination.appendChild(prevBtn);
-
-          // page numbers
+          elPagination.appendChild(makePgBtn('‹', state.page - 1, state.page === 1, '上一页'));
           var pages = getPageList(state.page, totalPages);
           pages.forEach(function (p) {
-            if (p === '…') {
-              var span = document.createElement('span');
-              span.className = 'pg-ellipsis';
-              span.textContent = '…';
-              elPagination.appendChild(span);
-            } else {
-              var b = makePgBtn(String(p), p, false, '第' + p + '页');
-              if (p === state.page) b.classList.add('active');
-              elPagination.appendChild(b);
-            }
+            if (p === '…') { var span = document.createElement('span'); span.className = 'pg-ellipsis'; span.textContent = '…'; elPagination.appendChild(span); }
+            else { var b = makePgBtn(String(p), p, false, '第' + p + '页'); if (p === state.page) b.classList.add('active'); elPagination.appendChild(b); }
           });
-
-          // Next
-          var nextBtn = makePgBtn('›', state.page + 1, state.page === totalPages, '下一页');
-          elPagination.appendChild(nextBtn);
-          // Last
+          elPagination.appendChild(makePgBtn('›', state.page + 1, state.page === totalPages, '下一页'));
           elPagination.appendChild(makePgBtn('»', totalPages, state.page === totalPages, '末页'));
         }
 
         function makePgBtn(label, target, disabled, title) {
           var btn = document.createElement('button');
-          btn.type = 'button';
-          btn.className = 'pg-btn';
-          btn.textContent = label;
+          btn.type = 'button'; btn.className = 'pg-btn'; btn.textContent = label;
           if (title) btn.title = title;
           if (disabled) btn.disabled = true;
           btn.addEventListener('click', function () {
             if (disabled) return;
             if (target < 1 || target > Math.ceil(filtered.length / PER_PAGE)) return;
-            state.page = target;
-            renderGrid();
-            renderPagination();
-            scrollTopGrid();
+            state.page = target; renderGrid(); renderPagination(); scrollTopGrid();
           });
           return btn;
         }
 
         function getPageList(current, total) {
           var arr = [];
-          if (total <= 7) {
-            for (var i = 1; i <= total; i++) arr.push(i);
-            return arr;
-          }
+          if (total <= 7) { for (var i = 1; i <= total; i++) arr.push(i); return arr; }
           arr.push(1);
           if (current > 4) arr.push('…');
-          var s = Math.max(2, current - 1);
-          var e = Math.min(total - 1, current + 1);
+          var s = Math.max(2, current - 1); var e = Math.min(total - 1, current + 1);
           for (var j = s; j <= e; j++) arr.push(j);
           if (current < total - 3) arr.push('…');
           arr.push(total);
@@ -719,21 +719,13 @@
           var totalPages = Math.max(1, Math.ceil(filtered.length / PER_PAGE));
           if (state.page > totalPages) state.page = totalPages;
           if (state.page < 1) state.page = 1;
-
           elTotal.textContent = allData.length;
           elFiltered.textContent = filtered.length;
-
           if (filtered.length === 0) {
-            elGrid.innerHTML = '';
-            elEmpty.classList.add('show');
-            elPagination.innerHTML = '';
-            refreshIcons();
-            return;
+            elGrid.innerHTML = ''; elEmpty.classList.add('show'); elPagination.innerHTML = ''; refreshIcons(); return;
           }
           elEmpty.classList.remove('show');
-          renderGrid();
-          renderPagination();
-          refreshIcons();
+          renderGrid(); renderPagination(); refreshIcons();
         }
 
         // ---------- Lightbox ----------
@@ -742,90 +734,62 @@
           elLightbox.classList.add('open');
           elLightbox.setAttribute('aria-hidden', 'false');
           document.body.style.overflow = 'hidden';
-          loadLightboxItem();
-          refreshIcons();
+          loadLightboxItem(); refreshIcons();
         }
-
         function closeLightbox() {
           elLightbox.classList.remove('open');
           elLightbox.setAttribute('aria-hidden', 'true');
           document.body.style.overflow = '';
           resetZoom(false);
         }
-
         function loadLightboxItem() {
           var item = filtered[lbIndex];
           if (!item) return;
           resetZoom(false);
-
-          elLbImage.src = imgSrc(item);
-          elLbImage.alt = item.a || '';
-
+          elLbImage.src = imgSrc(item); elLbImage.alt = item.a || '';
           elLbCounter.textContent = (lbIndex + 1) + ' / ' + filtered.length;
-
-          // tags
           elLbTags.innerHTML = '';
+          elLbTags.appendChild(makeTag(formatDate(item.d), ''));
           elLbTags.appendChild(makeTag(item.cn || '', 'cat'));
           if (item.a) elLbTags.appendChild(makeTag(item.a, ''));
           if (item.ch) elLbTags.appendChild(makeTag(item.ch, ''));
-
           elLbPrompt.textContent = (item.p || '') + (item.w && item.h ? '\n\n尺寸：' + item.w + 'x' + item.h : '');
-
           elLbFilename.textContent = item.f || '';
-
-          // nav button states
           document.getElementById('lb-prev').disabled = lbIndex <= 0;
           document.getElementById('lb-next').disabled = lbIndex >= filtered.length - 1;
-
-          // reset copy button
           if (copyTimer) { clearTimeout(copyTimer); copyTimer = null; }
-          elLbCopy.classList.remove('copied');
-          elLbCopyText.textContent = '复制提示词';
+          elLbCopy.classList.remove('copied'); elLbCopyText.textContent = '复制提示词';
         }
-
         function makeTag(text, extra) {
           var span = document.createElement('span');
           span.className = 'lb-tag' + (extra ? ' ' + extra : '');
           span.textContent = text;
           return span;
         }
-
         function navLightbox(dir) {
           var ni = lbIndex + dir;
           if (ni < 0 || ni >= filtered.length) return;
-          lbIndex = ni;
-          loadLightboxItem();
+          lbIndex = ni; loadLightboxItem();
         }
 
         // ---------- Zoom & Pan ----------
         function applyTransform() {
           elLbImage.style.transform = 'translate(' + lbPanX + 'px, ' + lbPanY + 'px) scale(' + lbZoom + ')';
           elLbZoomPct.textContent = Math.round(lbZoom * 100) + '%';
-          if (lbZoom > 1) {
-            elLbStage.style.cursor = isDragging ? 'grabbing' : 'grab';
-          } else {
-            elLbStage.style.cursor = 'zoom-in';
-          }
+          elLbStage.style.cursor = lbZoom > 1 ? (isDragging ? 'grabbing' : 'grab') : 'zoom-in';
         }
-
         function setZoom(z) {
           var nz = Math.round(z / 0.25) * 0.25;
-          // fix float rounding
           nz = Math.round(nz * 100) / 100;
           nz = Math.max(0.5, Math.min(5, nz));
           lbZoom = nz;
           if (lbZoom <= 1) { lbPanX = 0; lbPanY = 0; }
           applyTransform();
         }
-
         function resetZoom(apply) {
           lbZoom = 1; lbPanX = 0; lbPanY = 0;
           if (apply !== false) applyTransform();
-          else {
-            elLbImage.style.transform = '';
-            elLbZoomPct.textContent = '100%';
-            elLbStage.style.cursor = 'zoom-in';
-          }
+          else { elLbImage.style.transform = ''; elLbZoomPct.textContent = '100%'; elLbStage.style.cursor = 'zoom-in'; }
         }
 
         document.getElementById('lb-zoom-in').addEventListener('click', function () { setZoom(lbZoom + 0.25); });
@@ -835,18 +799,14 @@
         elLbStage.addEventListener('wheel', function (e) {
           if (!elLightbox.classList.contains('open')) return;
           e.preventDefault();
-          var delta = e.deltaY < 0 ? 0.25 : -0.25;
-          setZoom(lbZoom + delta);
+          setZoom(lbZoom + (e.deltaY < 0 ? 0.25 : -0.25));
         }, { passive: false });
 
-        // drag to pan
         elLbStage.addEventListener('mousedown', function (e) {
           if (lbZoom <= 1) return;
-          isDragging = true;
-          dragStartX = e.clientX; dragStartY = e.clientY;
+          isDragging = true; dragStartX = e.clientX; dragStartY = e.clientY;
           panStartX = lbPanX; panStartY = lbPanY;
-          elLbStage.style.cursor = 'grabbing';
-          e.preventDefault();
+          elLbStage.style.cursor = 'grabbing'; e.preventDefault();
         });
         window.addEventListener('mousemove', function (e) {
           if (!isDragging) return;
@@ -860,7 +820,6 @@
           elLbStage.style.cursor = lbZoom > 1 ? 'grab' : 'zoom-in';
         });
 
-        // touch drag (basic)
         var touchStartX = 0, touchStartY = 0, touchPanX = 0, touchPanY = 0, touchDragging = false;
         elLbStage.addEventListener('touchstart', function (e) {
           if (lbZoom <= 1 || e.touches.length !== 1) return;
@@ -876,14 +835,11 @@
         }, { passive: true });
         elLbStage.addEventListener('touchend', function () { touchDragging = false; });
 
-        // ---------- Lightbox controls ----------
         document.getElementById('lb-close').addEventListener('click', closeLightbox);
         document.getElementById('lb-prev').addEventListener('click', function () { navLightbox(-1); });
         document.getElementById('lb-next').addEventListener('click', function () { navLightbox(1); });
 
-        // click on backdrop area (stage-area background, not image/panel) to close
         elLbStage.addEventListener('click', function (e) {
-          // only close if clicking the stage background (not the image itself, and not zoomed for panning)
           if (e.target === elLbStage && lbZoom <= 1) closeLightbox();
         });
         var stageArea = document.querySelector('.lb-stage-area');
@@ -893,52 +849,33 @@
           });
         }
 
-        // ---------- Copy ----------
         elLbCopy.addEventListener('click', function () {
           var text = elLbPrompt.textContent || '';
           if (!text) return;
           function showCopied() {
-            elLbCopy.classList.add('copied');
-            elLbCopyText.textContent = '已复制';
+            elLbCopy.classList.add('copied'); elLbCopyText.textContent = '已复制';
             if (copyTimer) clearTimeout(copyTimer);
-            copyTimer = setTimeout(function () {
-              elLbCopy.classList.remove('copied');
-              elLbCopyText.textContent = '复制提示词';
-            }, 2000);
+            copyTimer = setTimeout(function () { elLbCopy.classList.remove('copied'); elLbCopyText.textContent = '复制提示词'; }, 2000);
           }
           if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(text).then(showCopied).catch(function () {
-              fallbackCopy(text, showCopied);
-            });
-          } else {
-            fallbackCopy(text, showCopied);
-          }
+            navigator.clipboard.writeText(text).then(showCopied).catch(function () { fallbackCopy(text, showCopied); });
+          } else { fallbackCopy(text, showCopied); }
         });
 
         function fallbackCopy(text, onOk) {
           try {
             var ta = document.createElement('textarea');
-            ta.value = text;
-            ta.setAttribute('readonly', '');
-            ta.style.position = 'fixed';
-            ta.style.top = '-9999px';
-            ta.style.opacity = '0';
-            document.body.appendChild(ta);
-            ta.select();
+            ta.value = text; ta.setAttribute('readonly', '');
+            ta.style.position = 'fixed'; ta.style.top = '-9999px'; ta.style.opacity = '0';
+            document.body.appendChild(ta); ta.select();
             var ok = document.execCommand('copy');
             document.body.removeChild(ta);
-            if (ok && onOk) onOk();
-            else alert('复制失败，请手动选择文本复制。');
-          } catch (err) {
-            alert('复制失败，请手动选择文本复制。');
-          }
+            if (ok && onOk) onOk(); else alert('复制失败，请手动选择文本复制。');
+          } catch (err) { alert('复制失败，请手动选择文本复制。'); }
         }
 
-        // ---------- Keyboard ----------
         document.addEventListener('keydown', function (e) {
           if (!elLightbox.classList.contains('open')) return;
-          var tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : '';
-          // allow shortcuts in lightbox regardless
           switch (e.key) {
             case 'Escape': e.preventDefault(); closeLightbox(); break;
             case 'ArrowLeft': e.preventDefault(); navLightbox(-1); break;
@@ -950,7 +887,8 @@
         });
 
         // ---------- Init ----------
-        renderChips();
+        renderDateTabs();
+        renderSubchips();
         applyAndRender();
         refreshIcons();
       })();
