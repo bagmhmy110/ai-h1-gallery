@@ -22,9 +22,6 @@
   --brand-radius-sm: 6px;
   --brand-radius-md: 10px;
   --brand-radius-lg: 14px;
-  --brand-radius-small: 6px;
-  --brand-radius-medium: 10px;
-  --brand-radius-large: 14px;
   --brand-success: #4ade80;
   --brand-warning: #fbbf24;
   --brand-danger: #f87171;
@@ -87,83 +84,114 @@
 </head>
 <body class="min-h-screen font-sans antialiased">
     <style id="gallery-styles">
-      .gallery-container { width: 100%; max-width: 1600px; margin: 0 auto; padding: 0 20px; }
-      .gallery-header { padding: 40px 0 28px; text-align: center; }
-      .gallery-title { font-size: clamp(28px, 4vw, 42px); font-weight: 700; letter-spacing: 2px; line-height: 1.2; }
-      .gallery-title .accent { color: var(--brand-primary); }
-      .gallery-subtitle { margin-top: 10px; font-size: 14px; color: var(--brand-muted-foreground); letter-spacing: 1px; }
-      .gallery-subtitle .num { color: var(--brand-foreground); font-weight: 600; }
+      /* ---------- Layout ---------- */
+      .app-layout { display: flex; width: 100%; min-height: 100vh; }
 
-      /* ---------- Filter Bar ---------- */
-      .filter-bar {
-        position: sticky; top: 0; z-index: 50;
-        background: rgba(12, 12, 14, 0.88);
-        backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-        border-bottom: 1px solid var(--brand-border);
+      /* ---------- Sidebar ---------- */
+      .sidebar {
+        flex: 0 0 260px; position: sticky; top: 0; height: 100vh; overflow-y: auto;
+        background: var(--brand-card); border-right: 1px solid var(--brand-border);
+        display: flex; flex-direction: column; z-index: 40;
       }
-      .filter-bar-inner {
-        display: flex; align-items: center; justify-content: space-between;
-        gap: 14px; padding: 10px 0; flex-wrap: wrap;
-      }
-      /* Date tabs row */
-      .date-row {
-        display: flex; gap: 6px; overflow-x: auto; padding-bottom: 6px;
-        -webkit-overflow-scrolling: touch;
-      }
-      .date-row::-webkit-scrollbar { height: 3px; }
-      .date-row::-webkit-scrollbar-thumb { background: var(--brand-border); border-radius: 2px; }
-      .date-tab {
-        padding: 6px 14px; border-radius: 8px; font-size: 13px; cursor: pointer;
-        border: 1px solid var(--brand-border); background: var(--brand-card);
-        color: var(--brand-muted-foreground); transition: all .2s ease; white-space: nowrap;
-        user-select: none; font-weight: 500;
-      }
-      .date-tab:hover { color: var(--brand-foreground); border-color: var(--brand-primary); }
-      .date-tab.active {
-        background: var(--brand-primary); color: var(--brand-primary-foreground);
-        border-color: var(--brand-primary); font-weight: 600;
-      }
-      .date-tab .date-count { font-size: 11px; opacity: .7; margin-left: 4px; }
+      .sidebar::-webkit-scrollbar { width: 4px; }
+      .sidebar::-webkit-scrollbar-thumb { background: var(--brand-border); border-radius: 2px; }
 
-      /* Sub-category chips row */
-      .subchips-row {
-        display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
-      }
-      .chip {
-        padding: 6px 14px; border-radius: 999px; font-size: 13px; cursor: pointer;
-        border: 1px solid var(--brand-border); background: var(--brand-card);
-        color: var(--brand-muted-foreground); transition: all .2s ease; white-space: nowrap; user-select: none;
-      }
-      .chip:hover { color: var(--brand-foreground); border-color: var(--brand-primary); }
-      .chip.active {
-        background: var(--brand-primary); color: var(--brand-primary-foreground);
-        border-color: var(--brand-primary); font-weight: 600;
-      }
-      .chip .chip-count { font-size: 11px; opacity: .7; margin-left: 4px; }
+      .sidebar-header { padding: 24px 20px 16px; border-bottom: 1px solid var(--brand-border); }
+      .sidebar-title { font-size: 22px; font-weight: 700; letter-spacing: 1px; }
+      .sidebar-title .accent { color: var(--brand-primary); }
+      .sidebar-subtitle { margin-top: 6px; font-size: 12px; color: var(--brand-muted-foreground); }
+      .sidebar-subtitle .num { color: var(--brand-foreground); font-weight: 600; }
 
-      .search-wrap { position: relative; flex: 0 1 280px; min-width: 180px; }
+      .sidebar-search { padding: 14px 16px 10px; border-bottom: 1px solid var(--brand-border); }
+      .search-wrap { position: relative; }
       .search-wrap .search-icon {
-        position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
+        position: absolute; left: 10px; top: 50%; transform: translateY(-50%);
         color: var(--brand-muted-foreground); pointer-events: none; display: flex;
       }
       .search-input {
-        width: 100%; padding: 9px 14px 9px 38px; border-radius: 999px;
-        background: var(--brand-card); border: 1px solid var(--brand-border);
+        width: 100%; padding: 8px 12px 8px 34px; border-radius: var(--brand-radius-sm);
+        background: var(--brand-muted); border: 1px solid var(--brand-border);
         color: var(--brand-foreground); font-size: 13px; outline: none; transition: border-color .2s ease;
       }
       .search-input::placeholder { color: var(--brand-muted-foreground); }
       .search-input:focus { border-color: var(--brand-primary); }
 
-      .filter-divider { width: 100%; height: 1px; background: var(--brand-border); margin: 4px 0; }
-
-      @media (max-width: 640px) {
-        .filter-bar-inner { flex-direction: column; align-items: stretch; }
-        .search-wrap { flex: 1 1 100%; }
+      .sidebar-section-label {
+        padding: 14px 20px 6px; font-size: 11px; font-weight: 600; text-transform: uppercase;
+        letter-spacing: 1.2px; color: var(--brand-muted-foreground);
       }
+
+      .nav-list { padding: 0 10px; flex: 1 1 auto; }
+      .nav-item {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 8px 12px; border-radius: var(--brand-radius-sm); font-size: 13px; cursor: pointer;
+        color: var(--brand-muted-foreground); transition: all .15s ease; user-select: none; margin-bottom: 2px;
+        width: 100%; text-align: left; background: transparent; border: none; font-family: inherit;
+      }
+      .nav-item:hover { background: var(--brand-muted); color: var(--brand-foreground); }
+      .nav-item.active {
+        background: var(--brand-primary); color: var(--brand-primary-foreground);
+        font-weight: 600;
+      }
+      .nav-item .nav-count { font-size: 11px; opacity: .65; font-variant-numeric: tabular-nums; }
+      .nav-item.active .nav-count { opacity: .8; }
+      .nav-item .nav-label { flex: 1 1 auto; }
+      .nav-item .nav-arrow { flex: 0 0 auto; margin-left: 6px; display: inline-flex; transition: transform .2s ease; }
+      .nav-item .nav-arrow svg { width: 14px; height: 14px; }
+      .nav-item.expanded .nav-arrow { transform: rotate(90deg); }
+
+      .sub-nav-list { padding: 2px 10px 4px 32px; }
+      .sub-nav-item {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 6px 10px; border-radius: var(--brand-radius-sm); font-size: 12.5px; cursor: pointer;
+        color: var(--brand-muted-foreground); transition: all .15s ease; user-select: none; margin-bottom: 2px;
+        width: 100%; text-align: left; background: transparent; border: none; font-family: inherit;
+      }
+      .sub-nav-item:hover { background: var(--brand-muted); color: var(--brand-foreground); }
+      .sub-nav-item.active {
+        background: var(--brand-primary); color: var(--brand-primary-foreground);
+        font-weight: 600;
+      }
+      .sub-nav-item .nav-count { font-size: 10px; opacity: .6; font-variant-numeric: tabular-nums; }
+      .sub-nav-item.active .nav-count { opacity: .8; }
+
+      .sidebar-toggle {
+        display: none; position: fixed; top: 12px; left: 12px; z-index: 60;
+        width: 40px; height: 40px; border-radius: var(--brand-radius-sm);
+        border: 1px solid var(--brand-border); background: var(--brand-card); color: var(--brand-foreground);
+        cursor: pointer; align-items: center; justify-content: center;
+      }
+      .sidebar-toggle svg { width: 20px; height: 20px; }
+
+      .sidebar-overlay {
+        display: none; position: fixed; inset: 0; z-index: 35; background: rgba(0,0,0,0.5);
+      }
+
+      @media (max-width: 768px) {
+        .sidebar-toggle { display: inline-flex; }
+        .sidebar {
+          position: fixed; top: 0; left: 0; height: 100vh; width: 260px;
+          transform: translateX(-100%); transition: transform .25s ease; z-index: 50;
+        }
+        .sidebar.open { transform: translateX(0); }
+        .sidebar-overlay.show { display: block; }
+      }
+
+      /* ---------- Main content ---------- */
+      .main-content { flex: 1 1 auto; min-width: 0; padding: 24px 20px 0; }
+
+      .main-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
+      .breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--brand-muted-foreground); }
+      .breadcrumb .crumb { cursor: pointer; transition: color .15s ease; }
+      .breadcrumb .crumb:hover { color: var(--brand-primary); }
+      .breadcrumb .crumb.current { color: var(--brand-foreground); font-weight: 600; }
+      .breadcrumb .sep { opacity: .4; }
+      .result-count { font-size: 13px; color: var(--brand-muted-foreground); }
+      .result-count .num { color: var(--brand-foreground); font-weight: 600; }
 
       /* ---------- Grid ---------- */
       .gallery-grid {
-        display: grid; gap: 16px; padding: 24px 0 40px;
+        display: grid; gap: 14px; padding-bottom: 40px;
         grid-template-columns: repeat(2, 1fr);
       }
       @media (min-width: 768px)  { .gallery-grid { grid-template-columns: repeat(3, 1fr); } }
@@ -322,65 +350,69 @@
         .lb-arrow.next { right: 10px; }
       }
     </style>
-    <main>
-      <header class="gallery-header">
-        <div class="gallery-container">
-          <h1 class="gallery-title">AI <span class="accent">画廊</span></h1>
-          <p class="gallery-subtitle">共 <span class="num" id="total-count">0</span> 张 · 当前筛选 <span class="num" id="filtered-count">0</span> 张</p>
-        </div>
-      </header>
 
-      <div class="filter-bar">
-        <div class="gallery-container">
-          <div class="filter-bar-inner">
-            <!-- Row 1: Date tabs -->
-            <div class="date-row" id="date-row"></div>
-            <div class="filter-divider"></div>
-            <!-- Row 2: Sub-category chips + search -->
-            <div class="subchips-row" id="subchips-row"></div>
-            <div class="search-wrap">
-              <span class="search-icon"><i data-lucide="search" style="width:16px;height:16px;"></i></span>
-              <input type="text" id="search-input" class="search-input" placeholder="搜索提示词 / 角色 / 风格…" autocomplete="off" />
-            </div>
+    <button class="sidebar-toggle" id="sidebar-toggle" title="菜单"><i data-lucide="menu"></i></button>
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <div class="app-layout">
+      <!-- ---------- Sidebar ---------- -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+          <div class="sidebar-title">AI <span class="accent">画廊</span></div>
+          <div class="sidebar-subtitle">共 <span class="num" id="total-count">0</span> 张图片</div>
+        </div>
+        <div class="sidebar-search">
+          <div class="search-wrap">
+            <span class="search-icon"><i data-lucide="search" style="width:14px;height:14px;"></i></span>
+            <input type="text" id="search-input" class="search-input" placeholder="搜索提示词 / 角色 / 风格…" autocomplete="off" />
           </div>
         </div>
-      </div>
+        <div class="sidebar-section-label">日期 / 分类</div>
+        <nav class="nav-list" id="nav-list"></nav>
+      </aside>
 
-      <section class="gallery-container">
+      <!-- ---------- Main ---------- -->
+      <main class="main-content">
+        <div class="main-header">
+          <div class="breadcrumb" id="breadcrumb"></div>
+          <div class="result-count">筛选结果 <span class="num" id="filtered-count">0</span> 张</div>
+        </div>
         <div class="gallery-grid" id="gallery-grid"></div>
         <div class="empty-state" id="empty-state">
           <div class="empty-icon"><i data-lucide="image-off"></i></div>
           <p>没有找到匹配的图片</p>
         </div>
         <div class="pagination" id="pagination"></div>
-      </section>
+      </main>
+    </div>
 
-      <div class="lightbox" id="lightbox" aria-hidden="true">
-        <div class="lb-layout">
-          <span class="lb-counter" id="lb-counter"></span>
-          <button class="lb-close-btn" id="lb-close" title="关闭 (ESC)"><i data-lucide="x"></i></button>
-          <div class="lb-stage-area">
-            <button class="lb-arrow prev" id="lb-prev" title="上一张 (←)"><i data-lucide="chevron-left"></i></button>
-            <div class="lb-stage" id="lb-stage">
-              <img class="lb-image" id="lb-image" alt="" />
-              <div class="lb-zoom-bar">
-                <button id="lb-zoom-out" title="缩小 (-)"><i data-lucide="minus"></i></button>
-                <span class="lb-zoom-pct" id="lb-zoom-pct">100%</span>
-                <button id="lb-zoom-in" title="放大 (+)"><i data-lucide="plus"></i></button>
-                <button id="lb-zoom-reset" title="重置 (0)"><i data-lucide="rotate-ccw"></i></button>
-              </div>
+    <!-- ---------- Lightbox ---------- -->
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+      <div class="lb-layout">
+        <span class="lb-counter" id="lb-counter"></span>
+        <button class="lb-close-btn" id="lb-close" title="关闭 (ESC)"><i data-lucide="x"></i></button>
+        <div class="lb-stage-area">
+          <button class="lb-arrow prev" id="lb-prev" title="上一张 (←)"><i data-lucide="chevron-left"></i></button>
+          <div class="lb-stage" id="lb-stage">
+            <img class="lb-image" id="lb-image" alt="" />
+            <div class="lb-zoom-bar">
+              <button id="lb-zoom-out" title="缩小 (-)"><i data-lucide="minus"></i></button>
+              <span class="lb-zoom-pct" id="lb-zoom-pct">100%</span>
+              <button id="lb-zoom-in" title="放大 (+)"><i data-lucide="plus"></i></button>
+              <button id="lb-zoom-reset" title="重置 (0)"><i data-lucide="rotate-ccw"></i></button>
             </div>
-            <button class="lb-arrow next" id="lb-next" title="下一张 (→)"><i data-lucide="chevron-right"></i></button>
           </div>
-          <aside class="lb-panel" id="lb-panel">
-            <div class="lb-tags" id="lb-tags"></div>
-            <button class="lb-copy" id="lb-copy"><i data-lucide="copy"></i><span id="lb-copy-text">复制提示词</span></button>
-            <div class="lb-prompt" id="lb-prompt"></div>
-            <div class="lb-filename" id="lb-filename"></div>
-          </aside>
+          <button class="lb-arrow next" id="lb-next" title="下一张 (→)"><i data-lucide="chevron-right"></i></button>
         </div>
+        <aside class="lb-panel" id="lb-panel">
+          <div class="lb-tags" id="lb-tags"></div>
+          <button class="lb-copy" id="lb-copy"><i data-lucide="copy"></i><span id="lb-copy-text">复制提示词</span></button>
+          <div class="lb-prompt" id="lb-prompt"></div>
+          <div class="lb-filename" id="lb-filename"></div>
+        </aside>
       </div>
-    </main>
+    </div>
+
     <script src="../assets/gallery-data.js"></script>
     <script>
       (function () {
@@ -410,7 +442,6 @@
           return (IMAGE_BASES[item.d] || IMAGE_BASES['20260731']) + item.f;
         }
 
-        // Category name lookup
         var CAT_NAMES = {
           'anime': '二次元', 'wuthering': '鸣潮风', 'guoman3d': '国漫3D',
           'real': '写实', 'retro': '复古', 'guofeng': '国风', 'dunhuang': '敦煌',
@@ -425,26 +456,23 @@
         var allData = (window.GALLERY_DATA && Array.isArray(window.GALLERY_DATA)) ? window.GALLERY_DATA : [];
         var filtered = [];
         var state = { date: 'all', category: 'all', search: '', page: 1 };
+        var expandedDates = {};  // track which dates are expanded in sidebar
 
-        // Build date list and sub-category map from data
-        var dateMap = {};      // date -> total count
-        var dateCatMap = {};   // date -> { cat: count }
-        var dateList = [];     // sorted unique dates
+        var dateMap = {};
+        var dateCatMap = {};
+        var dateList = [];
 
         allData.forEach(function (item) {
           var d = item.d;
-          if (!dateMap[d]) {
-            dateMap[d] = 0;
-            dateCatMap[d] = {};
-            dateList.push(d);
-          }
+          if (!dateMap[d]) { dateMap[d] = 0; dateCatMap[d] = {}; dateList.push(d); }
           dateMap[d]++;
           if (!dateCatMap[d][item.c]) dateCatMap[d][item.c] = 0;
           dateCatMap[d][item.c]++;
         });
         dateList.sort();
+        // Default: expand the selected date
+        if (state.date !== 'all') expandedDates[state.date] = true;
 
-        // Format date for display: "20260827" -> "08/27"
         function formatDate(dateStr) {
           if (dateStr === 'all') return '全部';
           var m = dateStr.substring(4, 6);
@@ -453,8 +481,7 @@
         }
 
         // Lightbox state
-        var lbIndex = 0;
-        var lbZoom = 1, lbPanX = 0, lbPanY = 0;
+        var lbIndex = 0, lbZoom = 1, lbPanX = 0, lbPanY = 0;
         var isDragging = false, dragStartX = 0, dragStartY = 0, panStartX = 0, panStartY = 0;
         var copyTimer = null;
 
@@ -462,11 +489,14 @@
         var elGrid = document.getElementById('gallery-grid');
         var elEmpty = document.getElementById('empty-state');
         var elPagination = document.getElementById('pagination');
-        var elDateRow = document.getElementById('date-row');
-        var elSubchips = document.getElementById('subchips-row');
+        var elNavList = document.getElementById('nav-list');
+        var elBreadcrumb = document.getElementById('breadcrumb');
         var elSearch = document.getElementById('search-input');
         var elTotal = document.getElementById('total-count');
         var elFiltered = document.getElementById('filtered-count');
+        var elSidebar = document.getElementById('sidebar');
+        var elSidebarToggle = document.getElementById('sidebar-toggle');
+        var elSidebarOverlay = document.getElementById('sidebar-overlay');
 
         var elLightbox = document.getElementById('lightbox');
         var elLbImage = document.getElementById('lb-image');
@@ -480,117 +510,129 @@
         var elLbZoomPct = document.getElementById('lb-zoom-pct');
 
         function refreshIcons() {
-          if (window.lucide && typeof window.lucide.createIcons === 'function') {
-            window.lucide.createIcons();
+          if (window.lucide && typeof window.lucide.createIcons === 'function') window.lucide.createIcons();
+        }
+
+        // ---------- Mobile sidebar toggle ----------
+        elSidebarToggle.addEventListener('click', function () {
+          elSidebar.classList.toggle('open');
+          elSidebarOverlay.classList.toggle('show');
+        });
+        elSidebarOverlay.addEventListener('click', function () {
+          elSidebar.classList.remove('open');
+          elSidebarOverlay.classList.remove('show');
+        });
+        function closeSidebarMobile() {
+          if (window.innerWidth <= 768) {
+            elSidebar.classList.remove('open');
+            elSidebarOverlay.classList.remove('show');
           }
         }
 
-        // ---------- Date tabs ----------
-        function renderDateTabs() {
-          elDateRow.innerHTML = '';
+        // ---------- Sidebar nav ----------
+        function renderNav() {
+          elNavList.innerHTML = '';
 
-          // "全部" tab
-          var allTab = document.createElement('button');
-          allTab.type = 'button';
-          allTab.className = 'date-tab' + (state.date === 'all' ? ' active' : '');
-          allTab.innerHTML = '全部<span class="date-count">' + allData.length + '</span>';
-          allTab.addEventListener('click', function () {
-            if (state.date === 'all') return;
-            state.date = 'all';
-            state.category = 'all';
-            state.page = 1;
-            renderDateTabs();
-            renderSubchips();
-            applyAndRender();
+          // "全部" item
+          var allItem = document.createElement('button');
+          allItem.type = 'button';
+          allItem.className = 'nav-item' + (state.date === 'all' && state.category === 'all' ? ' active' : '');
+          allItem.innerHTML = '<span class="nav-label">全部图片</span><span class="nav-count">' + allData.length + '</span>';
+          allItem.addEventListener('click', function () {
+            state.date = 'all'; state.category = 'all'; state.page = 1;
+            renderNav(); renderBreadcrumb(); applyAndRender(); closeSidebarMobile();
           });
-          elDateRow.appendChild(allTab);
+          elNavList.appendChild(allItem);
 
-          // Date tabs
+          // Date items with expandable sub-categories
           dateList.forEach(function (date) {
-            var tab = document.createElement('button');
-            tab.type = 'button';
-            tab.className = 'date-tab' + (state.date === date ? ' active' : '');
-            tab.innerHTML = formatDate(date) + '<span class="date-count">' + dateMap[date] + '</span>';
-            tab.addEventListener('click', function () {
-              if (state.date === date) return;
-              state.date = date;
-              state.category = 'all';
-              state.page = 1;
-              renderDateTabs();
-              renderSubchips();
-              applyAndRender();
+            var isExpanded = !!expandedDates[date];
+            var isActiveDate = state.date === date;
+
+            var dateItem = document.createElement('button');
+            dateItem.type = 'button';
+            dateItem.className = 'nav-item' + (isActiveDate && state.category === 'all' ? ' active' : '') + (isExpanded ? ' expanded' : '');
+            dateItem.innerHTML = '<span class="nav-label">' + formatDate(date) + '</span>' +
+              '<span class="nav-count">' + dateMap[date] + '</span>' +
+              '<span class="nav-arrow"><i data-lucide="chevron-right"></i></span>';
+            dateItem.addEventListener('click', function (e) {
+              // Click on arrow toggles expand, click on label selects date
+              var rect = dateItem.getBoundingClientRect();
+              var clickX = e.clientX - rect.left;
+              var arrowEl = dateItem.querySelector('.nav-arrow');
+              if (arrowEl) {
+                var arrowRect = arrowEl.getBoundingClientRect();
+                if (e.clientX >= arrowRect.left - 5) {
+                  // Toggle expand
+                  expandedDates[date] = !expandedDates[date];
+                  renderNav();
+                  refreshIcons();
+                  return;
+                }
+              }
+              // Select date
+              state.date = date; state.category = 'all'; state.page = 1;
+              expandedDates[date] = true;
+              renderNav(); renderBreadcrumb(); applyAndRender(); closeSidebarMobile();
             });
-            elDateRow.appendChild(tab);
+            elNavList.appendChild(dateItem);
+
+            // Sub-categories (if expanded)
+            if (isExpanded) {
+              var cats = dateCatMap[date];
+              if (cats) {
+                var sortedCats = Object.keys(cats).sort(function (a, b) { return cats[b] - cats[a]; });
+                var subList = document.createElement('div');
+                subList.className = 'sub-nav-list';
+                sortedCats.forEach(function (cat) {
+                  var name = CAT_NAMES[cat] || cat;
+                  var subItem = document.createElement('button');
+                  subItem.type = 'button';
+                  subItem.className = 'sub-nav-item' + (state.date === date && state.category === cat ? ' active' : '');
+                  subItem.innerHTML = '<span class="nav-label">' + name + '</span><span class="nav-count">' + cats[cat] + '</span>';
+                  subItem.addEventListener('click', function () {
+                    state.date = date; state.category = cat; state.page = 1;
+                    renderNav(); renderBreadcrumb(); applyAndRender(); closeSidebarMobile();
+                  });
+                  subList.appendChild(subItem);
+                });
+                elNavList.appendChild(subList);
+              }
+            }
           });
+
+          refreshIcons();
         }
 
-        // ---------- Sub-category chips ----------
-        function renderSubchips() {
-          elSubchips.innerHTML = '';
+        // ---------- Breadcrumb ----------
+        function renderBreadcrumb() {
+          elBreadcrumb.innerHTML = '';
+          var bc = document.createElement('span');
+          bc.className = 'crumb';
+          bc.textContent = '全部';
+          if (state.date === 'all') { bc.classList.add('current'); }
+          else { bc.addEventListener('click', function () { state.date = 'all'; state.category = 'all'; state.page = 1; renderNav(); renderBreadcrumb(); applyAndRender(); }); }
+          elBreadcrumb.appendChild(bc);
 
-          // "全部" chip
-          var allChip = document.createElement('button');
-          allChip.type = 'button';
-          allChip.className = 'chip' + (state.category === 'all' ? ' active' : '');
-          var totalCount = state.date === 'all' ? allData.length : (dateMap[state.date] || 0);
-          allChip.innerHTML = '全部<span class="chip-count">' + totalCount + '</span>';
-          allChip.addEventListener('click', function () {
-            if (state.category === 'all') return;
-            state.category = 'all';
-            state.page = 1;
-            renderSubchips();
-            applyAndRender();
-          });
-          elSubchips.appendChild(allChip);
-
-          // If a specific date is selected, show its sub-categories
           if (state.date !== 'all') {
-            var cats = dateCatMap[state.date];
-            if (cats) {
-              var sortedCats = Object.keys(cats).sort(function (a, b) { return cats[b] - cats[a]; });
-              sortedCats.forEach(function (cat) {
-                var name = CAT_NAMES[cat] || cat;
-                var chip = document.createElement('button');
-                chip.type = 'button';
-                chip.className = 'chip' + (state.category === cat ? ' active' : '');
-                chip.innerHTML = name + '<span class="chip-count">' + cats[cat] + '</span>';
-                chip.addEventListener('click', function () {
-                  if (state.category === cat) return;
-                  state.category = cat;
-                  state.page = 1;
-                  renderSubchips();
-                  applyAndRender();
-                });
-                elSubchips.appendChild(chip);
-              });
+            var sep1 = document.createElement('span'); sep1.className = 'sep'; sep1.textContent = '/'; elBreadcrumb.appendChild(sep1);
+            var dc = document.createElement('span');
+            dc.className = 'crumb' + (state.category === 'all' ? ' current' : '');
+            dc.textContent = formatDate(state.date);
+            if (state.category !== 'all') { dc.addEventListener('click', function () { state.category = 'all'; state.page = 1; renderNav(); renderBreadcrumb(); applyAndRender(); }); }
+            elBreadcrumb.appendChild(dc);
+
+            if (state.category !== 'all') {
+              var sep2 = document.createElement('span'); sep2.className = 'sep'; sep2.textContent = '/'; elBreadcrumb.appendChild(sep2);
+              var cc = document.createElement('span');
+              cc.className = 'crumb current';
+              cc.textContent = CAT_NAMES[state.category] || state.category;
+              elBreadcrumb.appendChild(cc);
             }
-          } else {
-            // When "all" dates selected, show all categories
-            var allCats = {};
-            allData.forEach(function (item) {
-              if (!allCats[item.c]) allCats[item.c] = 0;
-              allCats[item.c]++;
-            });
-            var sortedAll = Object.keys(allCats).sort(function (a, b) { return allCats[b] - allCats[a]; });
-            sortedAll.forEach(function (cat) {
-              var name = CAT_NAMES[cat] || cat;
-              var chip = document.createElement('button');
-              chip.type = 'button';
-              chip.className = 'chip' + (state.category === cat ? ' active' : '');
-              chip.innerHTML = name + '<span class="chip-count">' + allCats[cat] + '</span>';
-              chip.addEventListener('click', function () {
-                if (state.category === cat) return;
-                state.category = cat;
-                state.page = 1;
-                renderSubchips();
-                applyAndRender();
-              });
-              elSubchips.appendChild(chip);
-            });
           }
         }
 
-        // ---------- Search (debounced) ----------
+        // ---------- Search ----------
         var searchTimer = null;
         elSearch.addEventListener('input', function () {
           clearTimeout(searchTimer);
@@ -623,11 +665,8 @@
           var start = (state.page - 1) * PER_PAGE;
           var end = Math.min(start + PER_PAGE, total);
           var pageItems = filtered.slice(start, end);
-
           var frag = document.createDocumentFragment();
-          pageItems.forEach(function (item, i) {
-            frag.appendChild(createCard(item, start + i));
-          });
+          pageItems.forEach(function (item, i) { frag.appendChild(createCard(item, start + i)); });
           elGrid.appendChild(frag);
         }
 
@@ -710,10 +749,7 @@
 
         function scrollTopGrid() {
           var gridTop = elGrid.getBoundingClientRect().top + window.pageYOffset;
-          var filterBottom = 0;
-          var filterBar = document.querySelector('.filter-bar');
-          if (filterBar) filterBottom = filterBar.offsetHeight;
-          window.scrollTo({ top: Math.max(0, gridTop - filterBottom - 12), behavior: 'smooth' });
+          window.scrollTo({ top: Math.max(0, gridTop - 12), behavior: 'smooth' });
         }
 
         // ---------- Master render ----------
@@ -890,8 +926,8 @@
         });
 
         // ---------- Init ----------
-        renderDateTabs();
-        renderSubchips();
+        renderNav();
+        renderBreadcrumb();
         applyAndRender();
         refreshIcons();
       })();
