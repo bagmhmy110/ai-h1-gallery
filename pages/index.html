@@ -437,9 +437,16 @@
           '20260827': HF_BASE + '20260827/',
           '20260829': HF_BASE + '20260829/',
           '20260905': HF_BASE + '20260905/',
-          '20260907': HF_BASE + '20260907/'
+          '20260907': HF_BASE + '20260907/',
+          '20260909': HF_BASE + '20260909/',
+          '20260916_4view': HF_BASE + '20260916_4view/',
+          '20260916_real': HF_BASE + '20260916_real/'
         };
         function imgSrc(item) {
+          if (item.d === '20260916') {
+            if (item.c === 'real4view') return IMAGE_BASES['20260916_real'] + item.f;
+            return IMAGE_BASES['20260916_4view'] + item.f;
+          }
           return (IMAGE_BASES[item.d] || IMAGE_BASES['20260731']) + item.f;
         }
 
@@ -450,7 +457,8 @@
           'ccd': '性感CCD', 'jiayi': '性感嫁衣', 'xhs': '小红书',
           'diff': '仙侠', 'qn': '千禧怀旧', 'ty': '青春日记',
           'tyy': '青春记忆', 'stu': '学生旧照', 'tea': '教师旧照',
-          'armor': '铠甲骑士', 'erciyuan2': '二次元新'
+          'armor': '铠甲骑士', 'erciyuan2': '二次元新',
+          'xiuxian2': '仙侠新', '4view': '4视图', 'real4view': '真人4视图'
         };
 
         var PER_PAGE = 80;
