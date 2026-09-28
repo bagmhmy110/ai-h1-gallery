@@ -441,7 +441,9 @@
           '20260909': HF_BASE + '20260909/',
           '20260916_4view': HF_BASE + '20260916_4view/',
           '20260916_real': HF_BASE + '20260916_real/',
-          '20260926': HF_BASE + '20260926/'
+          '20260926': HF_BASE + '20260926/',
+          '20260927': HF_BASE + '20260927/',
+          '20260928': HF_BASE + '20260928/'
         };
         function imgSrc(item) {
           if (item.d === '20260916') {
@@ -450,6 +452,12 @@
           }
           if (item.d === '20260926') {
             return IMAGE_BASES['20260926'] + item.f;
+          }
+          if (item.d === '20260927') {
+            return IMAGE_BASES['20260927'] + item.f;
+          }
+          if (item.d === '20260928') {
+            return IMAGE_BASES['20260928'] + item.f;
           }
           return (IMAGE_BASES[item.d] || IMAGE_BASES['20260731']) + item.f;
         }
@@ -465,7 +473,8 @@
           'xiuxian2': '仙侠新', '4view': '4视图', 'real4view': '真人4视图',
           'misc02': '杂图02', 'ai_dance': 'AI舞蹈', 'hanfu_dance': '汉服舞蹈',
           'ai_gen02': 'AI生图02', 'xiuxian3': '仙侠风2', 'xiuxian_sex': '仙侠性感',
-          'mature2': '成熟女性2', 'bodypaint': '人体彩绘', 'lily': '百合'
+          'mature2': '成熟女性2', 'bodypaint': '人体彩绘', 'lily': '百合',
+          'adult_editorial': '成人写真', 'hanfu_editorial': '汉服写真', 'low_angle_ol': '低角度OL'
         };
 
         var PER_PAGE = 80;
