@@ -445,7 +445,8 @@
           '20260927': HF_BASE + '20260927/',
           '20260928': HF_BASE + '20260928/',
           '20261004': HF_BASE + '20261004/',
-          '20261005': HF_BASE + '20261005/'
+          '20261005': HF_BASE + '20261005/',
+          '20261006': HF_BASE + '20261006/'
         };
         function imgSrc(item) {
           if (item.d === '20260916') {
@@ -466,6 +467,9 @@
           }
           if (item.d === '20261005') {
             return IMAGE_BASES['20261005'] + item.f;
+          }
+          if (item.d === '20261006') {
+            return IMAGE_BASES['20261006'] + item.f;
           }
           return (IMAGE_BASES[item.d] || IMAGE_BASES['20260731']) + item.f;
         }
