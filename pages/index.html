@@ -443,7 +443,9 @@
           '20260916_real': HF_BASE + '20260916_real/',
           '20260926': HF_BASE + '20260926/',
           '20260927': HF_BASE + '20260927/',
-          '20260928': HF_BASE + '20260928/'
+          '20260928': HF_BASE + '20260928/',
+          '20261004': HF_BASE + '20261004/',
+          '20261005': HF_BASE + '20261005/'
         };
         function imgSrc(item) {
           if (item.d === '20260916') {
@@ -458,6 +460,12 @@
           }
           if (item.d === '20260928') {
             return IMAGE_BASES['20260928'] + item.f;
+          }
+          if (item.d === '20261004') {
+            return IMAGE_BASES['20261004'] + item.f;
+          }
+          if (item.d === '20261005') {
+            return IMAGE_BASES['20261005'] + item.f;
           }
           return (IMAGE_BASES[item.d] || IMAGE_BASES['20260731']) + item.f;
         }
