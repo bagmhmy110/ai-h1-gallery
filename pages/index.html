@@ -503,7 +503,7 @@
           if (!dateCatMap[d][item.c]) dateCatMap[d][item.c] = 0;
           dateCatMap[d][item.c]++;
         });
-        dateList.sort();
+        dateList.sort().reverse();
         // Default: expand the selected date
         if (state.date !== 'all') expandedDates[state.date] = true;
 
