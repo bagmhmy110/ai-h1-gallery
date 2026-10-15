@@ -446,7 +446,8 @@
           '20260928': HF_BASE + '20260928/',
           '20261004': HF_BASE + '20261004/',
           '20261005': HF_BASE + '20261005/',
-          '20261006': HF_BASE + '20261006/'
+          '20261006': HF_BASE + '20261006/',
+          '20261013': HF_BASE + '20261013/'
         };
         function imgSrc(item) {
           if (item.d === '20260916') {
@@ -471,6 +472,9 @@
           if (item.d === '20261006') {
             return IMAGE_BASES['20261006'] + item.f;
           }
+          if (item.d === '20261013') {
+            return IMAGE_BASES['20261013'] + item.f;
+          }
           return (IMAGE_BASES[item.d] || IMAGE_BASES['20260731']) + item.f;
         }
 
@@ -487,7 +491,8 @@
           'ai_gen02': 'AI生图02', 'xiuxian3': '仙侠风2', 'xiuxian_sex': '仙侠性感',
           'mature2': '成熟女性2', 'bodypaint': '人体彩绘', 'lily': '百合',
           'adult_editorial': '成人写真', 'hanfu_editorial': '汉服写真', 'low_angle_ol': '低角度OL',
-          'white_pink': '白粉仙侠', 'xianxia': '仙侠'
+          'white_pink': '白粉仙侠', 'xianxia': '仙侠',
+          'nsfw_adult': 'NSFW成人'
         };
 
         var PER_PAGE = 80;
